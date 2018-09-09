@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Chapter1_Problem5
+namespace Program2
 {
 	/// <summary>
 	/// Interaction logic for App.xaml

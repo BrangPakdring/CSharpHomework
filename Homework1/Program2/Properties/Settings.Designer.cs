@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Chapter1_Problem5.Properties
+namespace Program2.Properties
 {
 
 
