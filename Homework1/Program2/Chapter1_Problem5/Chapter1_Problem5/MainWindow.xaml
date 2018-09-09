@@ -1,0 +1,21 @@
+﻿<Window x:Class="Chapter1_Problem5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Chapter1_Problem5"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="265.2" Width="623.6">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="37*"/>
+			<ColumnDefinition Width="757*"/>
+		</Grid.ColumnDefinitions>
+		<TextBox x:Name="Number1" HorizontalAlignment="Left" Height="22" Margin="10.2,88,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="150" FontSize="16" Grid.Column="1" TextChanged="Number1_TextChanged"/>
+		<TextBox x:Name="Number2" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="206.2,88,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="150" FontSize="16" TextChanged="Number2_TextChanged"/>
+		<Button x:Name="Compute" Content="compute" Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="180.2,153,0,0" VerticalAlignment="Top" Width="203" Click="Button_Click" FontSize="16"/>
+		<TextBlock x:Name="Result" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="398.2,86,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="150" FontSize="16"/>
+		<Label Content="input two numbers:" Grid.Column="1" HorizontalAlignment="Left" Margin="10.2,25,0,0" VerticalAlignment="Top" FontSize="16"/>
+
+	</Grid>
+</Window>
