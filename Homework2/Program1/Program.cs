@@ -8,10 +8,10 @@ namespace Program1
 		{
 			while (true)
 			{
-				Console.WriteLine("input an integer in range [0, 2 ^ 31), or -1 to exit:");
+				Console.WriteLine("input an integer in range [2, 2 ^ 31), or -1 to exit:");
 				string rawNumber = Console.ReadLine();
 				
-				if (int.TryParse(rawNumber, out int number) == false || number < -1)
+				if (int.TryParse(rawNumber, out int number) == false || number < 2 && number != -1)
 				{
 					Console.WriteLine("invalid input");
 					continue;
@@ -19,23 +19,25 @@ namespace Program1
 				else if (number == -1) break;
 				else
 				{ 
-					int count = 0;
+					Console.Write(number + "=");
+					bool firstPosition = true;
 					for (int i = 2, limit = (int)Math.Sqrt(number); i <= limit && i <= number; ++i)
 					{
-						if (number % i == 0)
+						while (number % i == 0)
 						{
-							++count;
-							Console.Write(i + "\t");
-							while (number % i == 0) number /= i;
+							number /= i;
+							if (!firstPosition)Console.Write("*");
+							firstPosition = false;
+							Console.Write(i);
 						}
 					}
+
 					if (number > 1)
 					{
-						++count;
+						if (!firstPosition)Console.Write("*");
 						Console.Write(number);
 					}
 					Console.WriteLine();
-					Console.WriteLine(count + " numbers in total");
 				}
 			}
 		}

@@ -20,12 +20,12 @@ namespace Program2
 				{
 					int[] array = new int[arraySize];
 					int arrayIndex = 0;
-					char[] seperator = { ' ', '\t' };
+					char[] separator = { ' ', '\t' };
 
 					while (true)
 					{
 						Console.WriteLine($"input {arraySize - arrayIndex} integers in range [-2^31, 2^31):");
-						string[] rawArray = Console.ReadLine().Trim().Split(seperator, StringSplitOptions.RemoveEmptyEntries);
+						string[] rawArray = Console.ReadLine().Trim().Split(separator, StringSplitOptions.RemoveEmptyEntries);
 
 						for (int i = 0; arrayIndex < array.Length && i < rawArray.Length; ++i)
 						{
