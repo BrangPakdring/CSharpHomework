@@ -19,9 +19,14 @@ namespace Program2
 				else
 				{
 					int[] array = new int[arraySize];
+//					for (int i = 0; i < array.Length; i++)
+//					{
+//						array[i] = new Random().Next(int.MinValue, int.MaxValue);
+//					}
 					int arrayIndex = 0;
 					char[] separator = { ' ', '\t' };
 
+					// read until there are exactly arraySize numbers, skip invalid inputs
 					while (true)
 					{
 						Console.WriteLine($"input {arraySize - arrayIndex} integers in range [-2^31, 2^31):");
@@ -37,6 +42,7 @@ namespace Program2
 						if (arrayIndex == arraySize) break;
 					};
 
+					// compute answers
 					int max = int.MinValue;
 					int min = int.MaxValue;
 					long sum = 0L;
