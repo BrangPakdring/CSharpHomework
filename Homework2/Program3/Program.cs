@@ -8,7 +8,7 @@ namespace Program3
 		{
 			const int limit = 100;
 			Console.WriteLine($"prime numbers in range [2, {limit}]:");
-			var flag = new bool[limit + 1];
+			bool[] flag = new bool[limit + 1];
 			for (var i = 2; i <= limit; ++i)
 			{
 				if (!flag[i])

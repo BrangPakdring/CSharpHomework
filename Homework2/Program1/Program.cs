@@ -9,7 +9,7 @@ namespace Program1
 			while (true)
 			{
 				Console.WriteLine("input an integer in range [0, 2 ^ 31), or -1 to exit:");
-				var rawNumber = Console.ReadLine();
+				string rawNumber = Console.ReadLine();
 				
 				if (int.TryParse(rawNumber, out int number) == false || number < -1)
 				{
@@ -20,7 +20,7 @@ namespace Program1
 				else
 				{ 
 					int count = 0;
-					for (int i = 2, lim = (int)Math.Sqrt(number); i <= lim && i <= number; ++i)
+					for (int i = 2, limit = (int)Math.Sqrt(number); i <= limit && i <= number; ++i)
 					{
 						if (number % i == 0)
 						{
