@@ -90,6 +90,7 @@ namespace Program2
 			while (int.TryParse(Console.ReadLine(), out op) == false)
 				Console.Error.WriteLine("invalid input");
 
+			List<OrderDetails> res;
 			switch (op)
 			{
 				case 0:
@@ -97,22 +98,28 @@ namespace Program2
 					long id;
 					while (long.TryParse(Console.ReadLine(), out id) == false)
 						Console.Error.WriteLine("invalid input");
-					_order.RemoveOrderBy(OrderDetails.OrderDetailsType.OrderId, id);
+					res = _order.RemoveOrderBy(OrderDetails.OrderDetailsType.OrderId, id);
 					break;
 				case 1:
 					Console.WriteLine("input product name:");
 					var productName = Console.ReadLine();
-					_order.RemoveOrderBy(OrderDetails.OrderDetailsType.ProductName, productName);
+					res = _order.RemoveOrderBy(OrderDetails.OrderDetailsType.ProductName, productName);
 					break;
 				case 2:
 					Console.WriteLine("input client name:");
 					var clientName = Console.ReadLine();
-					_order.RemoveOrderBy(OrderDetails.OrderDetailsType.ClientName, clientName);
+					res = _order.RemoveOrderBy(OrderDetails.OrderDetailsType.ClientName, clientName);
 					break;
 				default:
 					Console.Error.WriteLine("invalid input");
 					goto InputOp;
 			}
+
+			foreach (var details in res)
+			{
+				Console.WriteLine(details);
+			}
+			Console.WriteLine($"removed {res.Count} orders in total");
 		}
 
 		static void ModifyOrdersOptions()
@@ -123,7 +130,7 @@ namespace Program2
 				Console.Error.WriteLine("invalid input");
 
 			var res = _order.FindOrderBy(OrderDetails.OrderDetailsType.OrderId, id);
-			if (res == null)
+			if (res.Count == 0)
 			{
 				Console.Error.WriteLine("no such order exists");
 				return;
@@ -139,6 +146,8 @@ namespace Program2
 
 			var details = new OrderDetails(productName, clientName);
 			_order.ModifyById(target.OrderId, details);
+
+			Console.WriteLine($"Modified order:\n{details}");
 		}
 
 		static void SearchForOrdersOptions()
@@ -179,7 +188,11 @@ namespace Program2
 					goto InputOp;
 			}
 
-			
+			foreach (var details in res)
+			{
+				Console.WriteLine(details);
+			}
+			Console.WriteLine($"found {res.Count} orders in total");
 		}
 	}
 }

@@ -16,7 +16,7 @@ namespace Program2
 
 		private readonly List<OrderDetails> _list;
 		
-		public List<OrderDetails> GetList()
+		public IEnumerable<OrderDetails> GetList()
 		{
 			return new List<OrderDetails>(_list);
 		}
@@ -32,9 +32,17 @@ namespace Program2
 			_list.Add(details);
 		}
 
-		public int RemoveAll(Predicate<OrderDetails> match)
+		public List<OrderDetails> RemoveAll(Predicate<OrderDetails> match)
 		{
-			return _list.RemoveAll(match);
+			var res = new List<OrderDetails>();
+			for (var i = 0; i < _list.Count; ++i)
+			{
+				if (!match(_list[i])) continue;
+				res.Add(_list[i]);
+				_list.RemoveAt(i--);
+			}
+
+			return res;
 		}
 
 		public List<OrderDetails> FindAll(Predicate<OrderDetails> match)

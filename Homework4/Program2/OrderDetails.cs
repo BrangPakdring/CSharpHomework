@@ -15,7 +15,7 @@ namespace Program2
 
 		public OrderDetails(string productName, string clientName)
 		{
-			OrderId = ++_currentOrderId;
+			OrderId = _currentOrderId++;
 			ProductName = productName;
 			ClientName = clientName;
 		}
@@ -28,7 +28,7 @@ namespace Program2
 
 		public override string ToString()
 		{
-			return string.Format("ID: {0, -16} | Product: {1, -16} | Client: {2, -16}", OrderId, ProductName, ClientName);
+			return string.Format("#{0, -16} | Product: {1, -16} | Client: {2, -16}", OrderId, ProductName, ClientName);
 		}
 	}
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace Program2
@@ -26,48 +27,47 @@ namespace Program2
 			_orderService.Add(details);
 		}
 
-		public int RemoveOrder(OrderDetails details)
+		public List<OrderDetails> RemoveOrder(OrderDetails details)
 		{
 			return _orderService.RemoveAll(details2 => details2.Equals(details));
 		}
 
-		private int RemoveOrderById(long id)
+		private List<OrderDetails> RemoveOrderById(long id)
 		{
 			return _orderService.RemoveAll(details => details.OrderId == id);
 		}
 
-		private int RemoveOrderByProduct(string productName)
+		private List<OrderDetails> RemoveOrderByProduct(string productName)
 		{
 			return _orderService.RemoveAll(details => details.ProductName == productName);
 		}
 
-		private int RemoveOrderByClient(string clientName)
+		private List<OrderDetails> RemoveOrderByClient(string clientName)
 		{
 			return _orderService.RemoveAll(details => details.ClientName == clientName);
 		}
 
-		public int RemoveOrderBy(OrderDetails.OrderDetailsType type, object content)
+		public List<OrderDetails> RemoveOrderBy(OrderDetails.OrderDetailsType type, object content)
 		{
 			switch (type)
 			{
 				case OrderDetails.OrderDetailsType.OrderId:
 					if (content is long l)
 						return RemoveOrderById(l);
-					else return -1;
-					break;
+					else break;
 				case OrderDetails.OrderDetailsType.ClientName:
 					if (content is string s)
 						return RemoveOrderByClient(s);
-					else return -1;
-					break;
+					else break;
 				case OrderDetails.OrderDetailsType.ProductName:
 					if (content is string s1)
 						return RemoveOrderByProduct(s1);
-					else return -1;
-					break;
+					else break;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(type), type, null);
 			}
+
+			return default(List<OrderDetails>);
 		}
 
 		private List<OrderDetails> FindOrderById(long id)
@@ -92,21 +92,20 @@ namespace Program2
 				case OrderDetails.OrderDetailsType.OrderId:
 					if (content is long l)
 						return FindOrderById(l);
-					else return null;
-					break;
+					else break;
 				case OrderDetails.OrderDetailsType.ClientName:
 					if (content is string s)
 						return FindOrderByClient(s);
-					else return null;
-					break;
+					else break;
 				case OrderDetails.OrderDetailsType.ProductName:
 					if (content is string s1)
 						return FindOrderByProduct(s1);
-					else return null;
-					break;
+					else break;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(type), type, null);
 			}
+
+			return default(List<OrderDetails>);
 		}
 
 		public bool ModifyById(long id, OrderDetails details)
@@ -121,9 +120,9 @@ namespace Program2
 		public void PrintOrders()
 		{
 			var list = _orderService.GetList();
-			foreach (var detailse in list)
+			foreach (var details in list)
 			{
-				Console.WriteLine(detailse);
+				Console.WriteLine(details);
 			}
 		}
 
