@@ -12,6 +12,6 @@ Repo for my C# Homework
 * Homework3
 	* Program1: Factory Pattern, get shapes from factory and show their area
 * Homework4
-	* Program1: Alarm clock timer implementation.
-	* Program2: Order System Mgr implementation.
+	* Program1: alarm clock timer implementation
+	* Program2: Order System Mgr implementation
 
