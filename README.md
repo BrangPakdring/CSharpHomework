@@ -11,4 +11,7 @@ Repo for my C# Homework
 	* Program3: C2P9, find all prime numbers in range [2, 100]
 * Homework3
 	* Program1: Factory Pattern, get shapes from factory and show their area
+* Homework4
+	* Program1: Alarm clock timer implementation.
+	* Program2: Order System Mgr implementation.
 
