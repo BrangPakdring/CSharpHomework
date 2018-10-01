@@ -57,14 +57,14 @@ namespace Program2
 			}
 		}
 
-		static void PrintOrdersOptions()
+		private static void PrintOrdersOptions()
 		{
 			Console.WriteLine("Current order list:");
 			_order.PrintOrders();
 			Console.WriteLine($"{_order.Count()} orders in total");
 		}
 
-		static void AddOrdersOptions()
+		private static void AddOrdersOptions()
 		{
 			Console.WriteLine("input product name:");
 			var productName = Console.ReadLine();
@@ -77,7 +77,7 @@ namespace Program2
 			Console.WriteLine($"Added order:\n{details}");
 		}
 
-		static void RemoveOrdersOptions()
+		private static void RemoveOrdersOptions()
 		{
 			Console.WriteLine("Keys:");
 			var keys = new[] {"Remove by ID", "Remove by Product Name", "Remove by Client Name"};
@@ -122,7 +122,7 @@ namespace Program2
 			Console.WriteLine($"removed {res.Count} orders in total");
 		}
 
-		static void ModifyOrdersOptions()
+		private static void ModifyOrdersOptions()
 		{
 			Console.WriteLine("input id:");
 			long id;
@@ -150,7 +150,7 @@ namespace Program2
 			Console.WriteLine($"Modified order:\n{details}");
 		}
 
-		static void SearchForOrdersOptions()
+		private static void SearchForOrdersOptions()
 		{
 			Console.WriteLine("Keys:");
 			var keys = new[] {"Search by ID", "Search by Product", "Search by Client Name"};

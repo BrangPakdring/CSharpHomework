@@ -52,7 +52,7 @@ namespace Program2
 
 		public bool ModifyAt(int index, OrderDetails details)
 		{
-			if (_list.Count <= index) return false;
+			if (index >= _list.Count || index < 0) return false;
 			_list[index] = details;
 			return true;
 		}
