@@ -13,7 +13,7 @@ namespace Program2
 		static void Main(string[] args)
 		{
 			Console.WriteLine("Order Manager");
-			_order = Order.GetInstance();
+			_order = Order.Instance();
 
 			var keys = new[]
 				{"Exit", "Print Orders", "Add Order", "Remove Orders", "Modify Orders", "Search for Orders"};

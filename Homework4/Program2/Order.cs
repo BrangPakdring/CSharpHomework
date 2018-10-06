@@ -14,10 +14,10 @@ namespace Program2
 		private Order()
 		{
 			if (_orderService == null)
-				_orderService = OrderService.GetInstance();
+				_orderService = OrderService.Instance();
 		}
 
-		public static Order GetInstance()
+		public static Order Instance()
 		{
 			return _sharedOrder ?? (_sharedOrder = new Order());
 		}

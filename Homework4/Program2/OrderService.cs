@@ -9,11 +9,12 @@ namespace Program2
 	{
 		private static OrderService _sharedOrderService;
 
-		public static OrderService GetInstance()
+		public static OrderService Instance()
 		{
 			return _sharedOrderService ?? (_sharedOrderService = new OrderService());
 		}
 
+		// store orders data
 		private readonly List<OrderDetails> _list;
 		
 		public IEnumerable<OrderDetails> GetList()
