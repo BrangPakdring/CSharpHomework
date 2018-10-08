@@ -115,6 +115,12 @@ namespace Program2
 					goto InputOp;
 			}
 
+			if (res.Count == 0)
+			{
+				Console.Error.WriteLine("no such order exists");
+				return;
+			}
+			
 			foreach (var details in res)
 			{
 				Console.WriteLine(details);
