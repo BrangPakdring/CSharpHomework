@@ -88,7 +88,7 @@ namespace Program1
 
 			// find orders by clients' name
 			{
-				Console.WriteLine("find orders by clients' name");
+				Console.WriteLine("find orders by clients' names");
 				var queryClient =
 					_orderService.FindAll(
 						order => order.Client.Name == "Tarjan");
@@ -100,7 +100,7 @@ namespace Program1
 
 			// find orders by products' name
 			{
-				Console.WriteLine("find orders by products' name");
+				Console.WriteLine("find orders by products' names");
 				var queryProduct =
 					from order in _orderService.GetOrderList()
 					where order.OrderDetailsList.Exists(orderDetails =>
