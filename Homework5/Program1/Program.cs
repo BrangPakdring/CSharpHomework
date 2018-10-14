@@ -1,4 +1,5 @@
-﻿// I'd misunderstood what order meant and this is a reconstructed program 
+﻿// I'd misunderstood what order meant and this is a reconstructed program from
+// the last one.
 
 using System;
 using System.Collections.Generic;
@@ -110,13 +111,15 @@ namespace Program1
 					Console.WriteLine(order);
 				}
 			}
-			
+
 			// find orders by costs greater than 10000
 			{
-				Console.WriteLine("find orders by total cost greater than 10000");
+				Console.WriteLine(
+					"find orders by total cost greater than 10000");
 				var queryCost = _orderService.GetOrderList()
 					.Where(order =>
-						order.OrderDetailsList.Sum(details => details.Cost) > 10000);
+						order.OrderDetailsList.Sum(details => details.Cost) >
+						10000);
 				foreach (var order in queryCost)
 				{
 					Console.WriteLine(order);

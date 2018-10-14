@@ -43,7 +43,7 @@ namespace Program1
 
 		public List<Order> FindAll(Predicate<Order> match)
 		{
-			return _list.Where(ordere => match(ordere)).ToList();
+			return _list.Where(order => match(order)).ToList();
 		}
 
 		public bool ModifyAt(int index, Order order)
