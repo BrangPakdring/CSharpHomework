@@ -21,9 +21,11 @@ namespace Program1
 		{
 		}
 
-		public void AddOrder(Order details)
+		public bool AddOrder(Order details)
 		{
+			if (_list.Contains(details)) return false;
 			_list.Add(details);
+			return true;
 		}
 
 		public List<Order> RemoveAll(Predicate<Order> match)

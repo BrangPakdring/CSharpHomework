@@ -21,6 +21,6 @@ namespace Program1
 		public decimal Cost { get; }
 
 		public override string ToString() =>
-			$"Product: {ProductName,-16} | Cost : {Cost,-16}";
+			$"Product: {ProductName,-32} | Cost: {Cost,-16}";
 	}
 }

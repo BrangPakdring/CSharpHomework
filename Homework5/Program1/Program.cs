@@ -14,10 +14,11 @@ namespace Program1
 		{
 			// add order test 1
 
+			Console.WriteLine("add order test 1");
 			var order1 = new Order(new Client("Dijkstra"));
-			var details1 = new OrderDetails("SSSP", 1919);
+			var details1 = new OrderDetails("SP", 1919);
 			var details2 =
-				new OrderDetails("Single Source Shortest Path", 810);
+				new OrderDetails("Shortest Path", 810);
 			order1.AddDetails(details1);
 			order1.AddDetails(details2);
 			Console.WriteLine(order1);
@@ -28,6 +29,7 @@ namespace Program1
 
 			// add order test 2
 
+			Console.WriteLine("add order test 2");
 			var order2 = new Order(new Client("Tarjan"));
 			var details3 = new OrderDetails("LCA", 810);
 			var details4 = new OrderDetails("Lowest Common Ancestor", 1919);
@@ -38,16 +40,18 @@ namespace Program1
 
 			// add order test 3
 
+			Console.WriteLine("add order test 3");
 			var order3 = new Order(new Client("Floyd"));
-			var details5 = new OrderDetails("SSSP", 1919);
+			var details5 = new OrderDetails("SP", 1919);
 			var details6 =
-				new OrderDetails("Single Source Shortest Path", 1919810);
+				new OrderDetails("Shortest Path", 1919810);
 			order3.AddDetails(details5);
 			order3.AddDetails(details6);
 			_orderService.AddOrder(order3);
 
 			// show list test 1
 			{
+				Console.WriteLine("show list test 1");
 				_orderService.AddOrder(order1);
 				var orderList = _orderService.GetOrderList();
 				foreach (var order in orderList)
@@ -58,6 +62,8 @@ namespace Program1
 
 			// show list test 2
 			{
+				Console.WriteLine("show list test 2");
+				_orderService.AddOrder(order2);
 				_orderService.AddOrder(order2);
 				var orderList = _orderService.GetOrderList();
 				foreach (var order in orderList)
@@ -68,6 +74,7 @@ namespace Program1
 
 			// find orders by their ids
 			{
+				Console.WriteLine("find orders by their ids");
 				var queryOrderId =
 					_orderService.GetOrderList()
 						.Where(orderList => orderList.OrderId == 114514)
@@ -80,6 +87,7 @@ namespace Program1
 
 			// find orders by clients' name
 			{
+				Console.WriteLine("find orders by clients' name");
 				var queryClient =
 					_orderService.FindAll(
 						order => order.Client.Name == "Tarjan");
@@ -91,10 +99,11 @@ namespace Program1
 
 			// find orders by products' name
 			{
+				Console.WriteLine("find orders by products' name");
 				var queryProduct =
 					from order in _orderService.GetOrderList()
 					where order.OrderDetailsList.Exists(orderDetails =>
-						orderDetails.ProductName == "SSSP")
+						orderDetails.ProductName == "SP")
 					select order;
 				foreach (var order in queryProduct)
 				{
@@ -104,7 +113,7 @@ namespace Program1
 			
 			// find orders by costs greater than 10000
 			{
-				Console.WriteLine("find orders by costs greater than 10000");
+				Console.WriteLine("find orders by total cost greater than 10000");
 				var queryCost = _orderService.GetOrderList()
 					.Where(order =>
 						order.OrderDetailsList.Sum(details => details.Cost) > 10000);
