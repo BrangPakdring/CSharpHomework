@@ -1,4 +1,4 @@
-﻿// I'd misunderstood what order meant and this is a reconstructed program from
+﻿// I'd misunderstood what "order" is and this is a reconstructed program from
 // the last one.
 
 using System;
@@ -73,7 +73,7 @@ namespace Program1
 				}
 			}
 
-			// find orders by their ids
+			// find orders by their ids matched 114514
 			{
 				Console.WriteLine("find orders by their ids");
 				var queryOrderId =
@@ -86,7 +86,7 @@ namespace Program1
 				}
 			}
 
-			// find orders by clients' name
+			// find orders by clients named "Tarjan"
 			{
 				Console.WriteLine("find orders by clients' names");
 				var queryClient =
@@ -98,7 +98,7 @@ namespace Program1
 				}
 			}
 
-			// find orders by products' name
+			// find orders by products named "SP"
 			{
 				Console.WriteLine("find orders by products' names");
 				var queryProduct =
