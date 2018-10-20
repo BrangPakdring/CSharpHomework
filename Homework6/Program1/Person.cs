@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace Program1
 {
-    public class Person
-    {
-        public string Name { get; set; }
+	public class Person
+	{
+		public string Name { get; set; }
 
-        private Person() { }
+		private Person()
+		{
+		}
 
-        public Person(string name)
-        {
-            Name = name;
-        }
-    }
+		public Person(string name)
+		{
+			Name = name;
+		}
+	}
 }
