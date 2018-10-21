@@ -8,20 +8,43 @@ namespace Program1
 {
 	public class Client : Person
 	{
-		private Client() : base(null)
+		public Client() : base()
 		{
-		}
+            Id = _ids++;
+        }
 
 		public Client(string name) : base(name)
 		{
+            Id = _ids++;
 		}
 
-		public ulong Id { set; get; } = _ids++;
+        public Client(Client client)
+        {
+            Id = client.Id;
+            Name = client.Name;
+        }
+
+		public ulong Id { set; get; }
 		public static ulong _ids = 893;
 
 		public override string ToString()
 		{
 			return $"{Name}";
 		}
-	}
+
+        public override bool Equals(object obj)
+        {
+            return obj is Client client &&
+                   base.Equals(obj) &&
+                   Id == client.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 1545243542;
+            hashCode = hashCode * -1521134295 + base.GetHashCode();
+            hashCode = hashCode * -1521134295 + Id.GetHashCode();
+            return hashCode;
+        }
+    }
 }

@@ -14,7 +14,6 @@ namespace Program1
 
 		private OrderService()
 		{
-			if (_list == null) _list = new List<Order>();
 			ReadStatus();
 		}
 
@@ -39,7 +38,7 @@ namespace Program1
 
 		public bool RemoveOrder(int index)
 		{
-			if (index < 0 || index > _list.Count) return false;
+			if (index < 0 || index >= _list.Count) return false;
 			_list.RemoveAt(index);
 			return true;
 		}
@@ -62,7 +61,7 @@ namespace Program1
 
 		public bool ModifyOrder(int index, Order order)
 		{
-			if (index < 0 || index > _list.Count) return false;
+			if (index < 0 || index >= _list.Count) return false;
 			_list[index] = order;
 			return true;
 		}
@@ -70,7 +69,7 @@ namespace Program1
 		public void SaveStatus()
 		{
 			var xmlSerializer = new XmlSerializer(_list.GetType());
-			using (var fileStream = new FileStream(SavingPath, FileMode.OpenOrCreate))
+			using (var fileStream = new FileStream(SavingPath, FileMode.Create))
 				xmlSerializer.Serialize(fileStream, _list);
 		}
 
@@ -85,7 +84,7 @@ namespace Program1
 		public void ClearStatus()
 		{
 			if (File.Exists(SavingPath)) File.Delete(SavingPath);
-			_instance = new OrderService();
+            _instance._list.Clear();
 		}
 	}
 }

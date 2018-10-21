@@ -10,7 +10,7 @@ namespace Program1
 	{
 		public string Name { get; set; }
 
-		private Person()
+		public Person()
 		{
 		}
 
@@ -18,5 +18,16 @@ namespace Program1
 		{
 			Name = name;
 		}
-	}
+
+        public override bool Equals(object obj)
+        {
+            return obj is Person person &&
+                   Name == person.Name;
+        }
+
+        public override int GetHashCode()
+        {
+            return 539060726 + EqualityComparer<string>.Default.GetHashCode(Name);
+        }
+    }
 }

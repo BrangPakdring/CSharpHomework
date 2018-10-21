@@ -8,43 +8,67 @@ namespace Program1
 {
 	public class Order
 	{
-		public readonly List<OrderDetails> _list = new List<OrderDetails>();
-		public List<OrderDetails> GetList() => new List<OrderDetails>(_list);
-		public Client Client { set; get; }
-		public ulong Id { set; get; } = Ids++;
+		public List<OrderDetails> List { set; get; } = new List<OrderDetails>();
+        public Client Client { set; get; } = new Client();
+		public ulong Id = Ids++;
 		public static ulong Ids = 1919810114514;
-		public decimal Cost => _list.Sum(orderDetails => orderDetails.Cost);
+		public decimal Cost => List.Sum(orderDetails => orderDetails.Cost);
 
-		private Order()
+		public Order()
 		{
 		}
+
+        public Order(Order order)
+        {
+            List = new List<OrderDetails>(order.List);
+            Client = new Client(order.Client);
+        }
 
 		public Order(Client client)
 		{
 			Client = client;
 		}
 
-		public override string ToString()
-		{
-			StringBuilder stringBuilder = new StringBuilder($"#{Id}\nClient: {Client}\n");
-			foreach (var orderDetails in _list)
-			{
-				stringBuilder.AppendLine(orderDetails.ToString());
-			}
-
-			return stringBuilder.ToString();
-		}
-
 		public void AddOrderDetails(OrderDetails orderDetails)
 		{
-			_list.Add(orderDetails);
+            List.Add(orderDetails);
 		}
 
 		public bool RemoveOrderDetails(int index)
 		{
-			if (index < 0 || index > _list.Count) return false;
-			_list.RemoveAt(index);
+			if (index < 0 || index > List.Count) return false;
+            List.RemoveAt(index);
 			return true;
-		}
-	}
+        }
+
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder($"#{Id}\nClient: {Client}\n");
+            foreach (var orderDetails in List)
+            {
+                stringBuilder.AppendLine(orderDetails.ToString());
+            }
+
+            return stringBuilder.ToString();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Order order &&
+                   EqualityComparer<List<OrderDetails>>.Default.Equals(List, order.List) &&
+                   EqualityComparer<Client>.Default.Equals(Client, order.Client) &&
+                   Id == order.Id &&
+                   Cost == order.Cost;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -1948411825;
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<OrderDetails>>.Default.GetHashCode(List);
+            hashCode = hashCode * -1521134295 + EqualityComparer<Client>.Default.GetHashCode(Client);
+            hashCode = hashCode * -1521134295 + Id.GetHashCode();
+            hashCode = hashCode * -1521134295 + Cost.GetHashCode();
+            return hashCode;
+        }
+    }
 }
