@@ -15,6 +15,8 @@ Repo for my C# Homework
 	* Program1: alarm clock timer implementation
 	* Program2: Order System Mgr implementation
 * Homework5
-    * Program1: Order System Mgr implementation Linq features tested (reconstructed)
-    * Program2: C5P15, improve the cayley tree program
-
+	* Program1: Order System Mgr implementation Linq features tested (reconstructed)
+	* Program2: C5P15, improve the cayley tree program
+* Homework6
+	* Program1: Order System Mgr implementation XmlSerialization tested (reconstructed)
+	* Program1Test1: MSTest based unit test to Program1
