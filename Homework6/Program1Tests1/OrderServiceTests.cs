@@ -122,21 +122,23 @@ namespace Program1.Tests
             orderService.ClearStatus();
             for (var i = 0; i < MaxListSize; ++i)
                 AddOrderTest();
-            var list = orderService.GetList();
+            var list1 = orderService.GetList();
             orderService.SaveStatus();
             orderService.ReadStatus();
             var list2 = orderService.GetList();
-            for (var i = 0; i < list.Count; ++i)
+            Assert.AreSame(list1.Count, list2.Count);
+            Assert.AreEqual(list1, list2);
+            for (var i = 0; i < list1.Count; ++i)
             {
-                for (var j = 0; j < list[i].List.Count; ++j)
+                for (var j = 0; j < list1[i].List.Count; ++j)
                 {
-                    Assert.AreEqual(list[i].List[j].Product, list2[i].List[j].Product);
-                    Assert.AreEqual(list[i].List[j].Cost, list2[i].List[j].Cost);
-                    Assert.AreEqual(list[i].List[j].Count, list2[i].List[j].Count);
+                    Assert.AreEqual(list1[i].List[j].Product, list2[i].List[j].Product);
+                    Assert.AreEqual(list1[i].List[j].Cost, list2[i].List[j].Cost);
+                    Assert.AreEqual(list1[i].List[j].Count, list2[i].List[j].Count);
                 }
-                Assert.AreEqual(list[i].Client, list2[i].Client);
-                Assert.AreEqual(list[i].Cost, list2[i].Cost);
-                Assert.AreEqual(list[i].Id, list2[i].Id);
+                Assert.AreEqual(list1[i].Client, list2[i].Client);
+                Assert.AreEqual(list1[i].Cost, list2[i].Cost);
+                Assert.AreEqual(list1[i].Id, list2[i].Id);
             }
         }
 

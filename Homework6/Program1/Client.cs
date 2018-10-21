@@ -10,12 +10,12 @@ namespace Program1
 	{
 		public Client() : base()
 		{
-            Id = _ids++;
+            Id = Ids++;
         }
 
 		public Client(string name) : base(name)
 		{
-            Id = _ids++;
+            Id = Ids++;
 		}
 
         public Client(Client client)
@@ -25,7 +25,7 @@ namespace Program1
         }
 
 		public ulong Id { set; get; }
-		public static ulong _ids = 893;
+		public static ulong Ids = 893;
 
 		public override string ToString()
 		{

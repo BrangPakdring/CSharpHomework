@@ -55,7 +55,8 @@ namespace Program1
         public override bool Equals(object obj)
         {
             return obj is Order order &&
-                   EqualityComparer<List<OrderDetails>>.Default.Equals(List, order.List) &&
+                   /*EqualityComparer<List<OrderDetails>>.Default.Equals(List, order.List) &&*/
+                   List.SequenceEqual(order.List) &&
                    EqualityComparer<Client>.Default.Equals(Client, order.Client) &&
                    Id == order.Id &&
                    Cost == order.Cost;

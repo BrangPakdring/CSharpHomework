@@ -7,7 +7,7 @@ using Program1;
 
 namespace Program1Tests1
 {
-    class Generator
+    public class Generator
     {
         private readonly static Random random = new Random();
 
@@ -15,7 +15,7 @@ namespace Program1Tests1
 
         public static int MaxOrderDetailsSize { set; get; } = 1000;
 
-        internal static Order GetOrder()
+        public static Order GetOrder()
         {
             var res = new Order(GetClient());
             var cnt = random.Next(MaxOrderDetailsSize);
@@ -26,22 +26,22 @@ namespace Program1Tests1
             return res;
         }
 
-        internal static Product GetProduct()
+        public static Product GetProduct()
         {
             return new Product(GetRandomString(), (decimal)random.NextDouble() * short.MaxValue);
         }
 
-        internal static Client GetClient()
+        public static Client GetClient()
         {
             return new Client(GetRandomString());
         }
 
-        internal static OrderDetails GetOrderDetails()
+        public static OrderDetails GetOrderDetails()
         {
             return new OrderDetails(GetProduct(), (uint)(random.NextDouble() * uint.MaxValue));
         }
 
-        private static string GetRandomString()
+        public static string GetRandomString()
         {
             var r = random.NextDouble();
             if (r < 0.16) return "";
