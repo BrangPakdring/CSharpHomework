@@ -126,8 +126,9 @@ namespace Program1.Tests
             orderService.SaveStatus();
             orderService.ReadStatus();
             var list2 = orderService.GetList();
-            Assert.AreSame(list1.Count, list2.Count);
-            Assert.AreEqual(list1, list2);
+            Assert.AreEqual(list1.Count, list2.Count);
+            // TODO: List equals method test
+            // Assert.AreEqual(list1, list2);
             for (var i = 0; i < list1.Count; ++i)
             {
                 for (var j = 0; j < list1[i].List.Count; ++j)
