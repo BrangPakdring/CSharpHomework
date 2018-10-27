@@ -24,14 +24,12 @@ namespace Program1
         private void Refresh(object sender, EventArgs e)
         {
             orderBindingSource.DataSource = orderService.List;
-            orderDataGridView.Refresh();
         }
 
         private void AddOrderButton_Click(object sender, EventArgs e)
         {
             new AddOrderForm().ShowDialog();
-
-            orderBindingSource.DataSource = orderService.List;
+            Refresh(sender, e);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -103,6 +101,18 @@ namespace Program1
                     MessageBox.Show("Error occurs while loading data.", "Error");
                 }
             }
+        }
+
+        private void ModifyOrderButton_Click(object sender, EventArgs e)
+        {
+            if (orderDataGridView.SelectedRows.Count != 1)
+            {
+                MessageBox.Show("Please select exactly one row to modify.");
+                return;
+            }
+            var row = orderDataGridView.SelectedRows[0];
+            new AddOrderForm(row.DataBoundItem as Order, row.Index).ShowDialog();
+            Refresh(sender, e);
         }
     }
 }

@@ -12,8 +12,14 @@ namespace Program1
 {
     public partial class AddOrderForm : Form
     {
+        /// <summary>
+        /// Current editing order.
+        /// </summary>
         Order Order;
-        public decimal Coste { set; get; }
+
+        /// <summary>
+        /// Specify the operation status.
+        /// </summary>
         enum OperationStatus
         {
             Idle = 0b0,
@@ -23,10 +29,42 @@ namespace Program1
         }
         OperationStatus operationStatus = OperationStatus.Idle;
 
+        /// <summary>
+        /// Specify the reason entering.
+        /// </summary>
+        enum EnterType
+        {
+            Null,
+            Add,
+            Modify
+        }
+        EnterType enterType = EnterType.Null;
+
+        /// <summary>
+        /// For modification, use an index to specify the order.
+        /// </summary>
+        int modifyIndex;
+
         public AddOrderForm()
         {
             InitializeComponent();
             Order = new Order();
+            enterType = EnterType.Add;
+        }
+
+        /// <summary>
+        /// Modify form.
+        /// </summary>
+        /// <param name="order"></param>
+        /// <param name="index"></param>
+        public AddOrderForm(Order order, int index)
+        {
+            InitializeComponent();
+            Order = order;
+            enterType = EnterType.Modify;
+            foreach (var e in order.List)
+                orderDetailsBindingSource.List.Add(e);
+            modifyIndex = index;
         }
 
         /// <summary>
@@ -57,12 +95,20 @@ namespace Program1
             dataGridView1.UserAddedRow += DataGridView1_UserAddedRow;
             dataGridView1.UserDeletingRow += DataGridView1_UserDeletingRow;
             dataGridView1.RowLeave += DataGridView1_RowLeave;
-            dataGridView1.CellEndEdit += DataGridView1_CellEndEdit;
+            dataGridView1.CellBeginEdit += DataGridView1_CellBeginEdit;
 
             dataGridView1.DataError += DataGridView1_DataError;
+
+            FormClosing += AddOrderForm_FormClosing;
         }
 
-        private void DataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void AddOrderForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // New order is discarded.
+            if (e.CloseReason != CloseReason.None) --Order.Ids;
+        }
+
+        private void DataGridView1_CellBeginEdit(object sender, EventArgs e)
         {
             if (operationStatus == OperationStatus.Added) return;
             operationStatus = OperationStatus.Modified;
@@ -134,6 +180,11 @@ namespace Program1
         /// <param name="e"></param>
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
+            if (enterType == EnterType.Modify)
+            {
+                OrderService.GetInstance().RemoveOrder(modifyIndex);
+//                Order.Id = Order.Ids++;
+            }
             OrderService.GetInstance().AddOrder(Order);
             this.Dispose();
         }
