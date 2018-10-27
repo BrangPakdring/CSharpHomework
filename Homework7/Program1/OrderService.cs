@@ -30,9 +30,9 @@ namespace Program1
 
 		public string SavingPath { set; get; } = "./OrderService.xml";
 
-		public List<Order> _list = new List<Order>();
+		private List<Order> _list { set; get; } = new List<Order>();
 
-        public List<Order> List { set; get; } = new List<Order>();
+        public List<Order> List { get => new List<Order>(_list); }
 
 		public void AddOrder(Order order) => _list.Add(order);
 
