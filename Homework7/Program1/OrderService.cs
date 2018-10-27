@@ -28,7 +28,7 @@ namespace Program1
 
 		#endregion
 
-		public string SavingPath { set; get; } = "./OrderService.xml";
+		public static string SavingPath { set; get; } = "./OrderService.xml";
 
 		private List<Order> _list { set; get; } = new List<Order>();
 
@@ -66,24 +66,23 @@ namespace Program1
 			return true;
 		}
 
-		public void SaveStatus()
+		public void SaveStatus(string path = "./list.xml")
 		{
 			var xmlSerializer = new XmlSerializer(_list.GetType());
-			using (var fileStream = new FileStream(SavingPath, FileMode.Create))
+			using (var fileStream = new FileStream(path, FileMode.Create))
 				xmlSerializer.Serialize(fileStream, _list);
 		}
 
-		public void ReadStatus()
+		public void ReadStatus(string path = "./list.xml")
 		{
-			if (!File.Exists(SavingPath)) return;
 			var xmlSerializer = new XmlSerializer(_list.GetType());
-			using (var fileStream = new FileStream(SavingPath, FileMode.Open))
+			using (var fileStream = new FileStream(path, FileMode.Open))
                 _list = (List<Order>) xmlSerializer.Deserialize(fileStream);
 		}
 
-		public void ClearStatus()
+		public void ClearStatus(string path = "./list.xml")
 		{
-			if (File.Exists(SavingPath)) File.Delete(SavingPath);
+			if (File.Exists(path)) File.Delete(path);
             _instance._list.Clear();
 		}
 	}

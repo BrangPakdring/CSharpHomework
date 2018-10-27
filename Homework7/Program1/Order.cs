@@ -13,7 +13,20 @@ namespace Program1
         public Client Client { set; get; } = new Client();
         public ulong Id { set; get; } = Ids++;
 		public static ulong Ids = 1919810114514;
-        public decimal Cost => List.Sum(orderDetails => orderDetails.Cost);
+        public decimal Cost
+        {
+            get
+            {
+                try
+                {
+                    return List.Sum(orderDetails => orderDetails.Cost);
+                }
+                catch (NullReferenceException)
+                {
+                    return 0;
+                }
+            }
+        }
 
 		public Order()
 		{

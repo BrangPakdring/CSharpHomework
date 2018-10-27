@@ -8,27 +8,39 @@ using System.Runtime.Serialization;
 namespace Program1
 {
     public class OrderDetails
-	{
+    {
+
         public Product Product { set; get; } = new Product();
-        public string ProductName => Product.Name; 
-        public decimal ProductPrice { get => Product.Price; }
-        public uint Count { set; get; } = 0;
+        public string ProductName { set => Product.Name = value; get => Product.Name; }
+        public decimal ProductPrice
+        {
+            set
+            {
+                if (value < 0) Product.Price = -value;
+                else Product.Price = value;
+            }
+            get => Product.Price;
+        }
+        public uint Count
+        {
+            get; set;
+        }
         public decimal Cost => Count * Product.Price;
 
-		public OrderDetails()
-		{
-		}
+        public OrderDetails()
+        {
+        }
 
-		public OrderDetails(Product product, uint count = 1)
-		{
-			Product = product;
-			Count = count;
-		}
+        public OrderDetails(Product product, uint count = 1)
+        {
+            Product = product;
+            Count = count;
+        }
 
-		public override string ToString()
-		{
-			return $"Product: {Product,-20} | Count: {Count,-10} | Cost: {Cost,10}$";
-		}
+        public override string ToString()
+        {
+            return $"Product: {Product,-20} | Count: {Count,-10} | Cost: {Cost,10}$";
+        }
 
         public override bool Equals(object obj)
         {
