@@ -114,5 +114,11 @@ namespace Program1
             new AddOrderForm(row.DataBoundItem as Order, row.Index).ShowDialog();
             Refresh(sender, e);
         }
+
+        private void NewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            orderService.RemoveAll(o => o != null);
+            Refresh(sender, e);
+        }
     }
 }
