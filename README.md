@@ -20,3 +20,5 @@ Repo for my C# Homework
 * Homework6
 	* Program1: Order System Mgr implementation XmlSerialization tested (reconstructed)
 	* Program1Test1: MSTest based unit test to Program1
+* Homework7
+	* Program1: Order Mgr WinForm UI 
