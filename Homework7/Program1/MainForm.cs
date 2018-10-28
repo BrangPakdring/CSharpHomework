@@ -159,6 +159,7 @@ namespace Program1
 			catch
 			{
 				MessageBox.Show("Invalid range number");
+				return;
 			}
 
 			if (funcs.Count == 0)
