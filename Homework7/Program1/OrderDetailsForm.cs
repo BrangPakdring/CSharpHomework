@@ -16,6 +16,7 @@ namespace Program1
 		/// Current editing order.
 		/// </summary>
 		Order Order;
+		Order originOrder;
 
 		/// <summary>
 		/// Specify the operation status.
@@ -65,7 +66,7 @@ namespace Program1
 			foreach (var e in order.List)
 				orderDetailsBindingSource.List.Add(e);
 			modifyIndex = index;
-			OrderService.GetInstance().RemoveAll(order0 => order0.Equals(order));
+			originOrder = order;
 		}
 
 		/// <summary>
@@ -186,11 +187,11 @@ namespace Program1
 				MessageBox.Show("Client name must not be empty.");
 				return;
 			}
-/*			if (enterType == EnterType.Modify)
+			if (enterType == EnterType.Modify)
 			{
-				OrderService.GetInstance().RemoveOrder(modifyIndex);
+				OrderService.GetInstance().RemoveAll(order0 => order0.Equals(originOrder));
 				//                Order.Id = Order.Ids++;
-			}*/
+			}
 			OrderService.GetInstance().AddOrder(Order);
 			this.Dispose();
 		}
