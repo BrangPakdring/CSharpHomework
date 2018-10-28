@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Program1
 {
-    public class Person
+	public class Person
 	{
-        public string Name { get; set; }
+		public string Name { get; set; }
 
 		public Person()
 		{
@@ -20,15 +20,15 @@ namespace Program1
 			Name = name;
 		}
 
-        public override bool Equals(object obj)
-        {
-            return obj is Person person &&
-                   Name == person.Name;
-        }
+		public override bool Equals(object obj)
+		{
+			return obj is Person person &&
+				   Name == person.Name;
+		}
 
-        public override int GetHashCode()
-        {
-            return 539060726 + EqualityComparer<string>.Default.GetHashCode(Name);
-        }
-    }
+		public override int GetHashCode()
+		{
+			return 539060726 + EqualityComparer<string>.Default.GetHashCode(Name);
+		}
+	}
 }
