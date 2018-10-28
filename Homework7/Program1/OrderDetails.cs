@@ -14,11 +14,7 @@ namespace Program1
         public string ProductName { set => Product.Name = value; get => Product.Name; }
         public decimal ProductPrice
         {
-            set
-            {
-                if (value < 0) Product.Price = -value;
-                else Product.Price = value;
-            }
+            set => Product.Price = value;
             get => Product.Price;
         }
         public uint Count

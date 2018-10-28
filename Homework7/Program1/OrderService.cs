@@ -72,7 +72,7 @@ namespace Program1
 
 		public void ExportList(string path = null)
         {
-            SavingPath = path ?? "./tmp.xml";
+            if (path != null) SavingPath = path;
             var xmlSerializer = new XmlSerializer(_list.GetType());
 			using (var fileStream = new FileStream(SavingPath, FileMode.Create))
 				xmlSerializer.Serialize(fileStream, _list);
@@ -80,8 +80,8 @@ namespace Program1
 
 		public void ImportList(string path = null)
 		{
-            SavingPath = path ?? "./tmp.xml";
-            var xmlSerializer = new XmlSerializer(_list.GetType());
+            if (path != null) SavingPath = path;
+             var xmlSerializer = new XmlSerializer(_list.GetType());
             if (File.Exists(SavingPath) == false) return;
 			using (var fileStream = new FileStream(SavingPath, FileMode.Open))
                 _list = (List<Order>) xmlSerializer.Deserialize(fileStream);
@@ -89,7 +89,7 @@ namespace Program1
 
 		public void ClearList(string path = null)
         {
-            SavingPath = path ?? "./tmp.xml";
+            if (path != null) SavingPath = path;
             if (File.Exists(SavingPath)) File.Delete(SavingPath);
             _instance._list.Clear();
 		}
@@ -115,7 +115,10 @@ namespace Program1
                     Client.Ids = Convert.ToUInt64(streamReader.ReadLine());
                 }
             }
-            catch { }
+            catch
+            {
+                SavingPath = "./tmp.xml";
+            }
         }
 	}
 }

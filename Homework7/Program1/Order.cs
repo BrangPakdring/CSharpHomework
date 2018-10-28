@@ -8,11 +8,21 @@ using System.Threading.Tasks;
 namespace Program1
 {
     public class Order
-	{
-		public List<OrderDetails> List { set; get; } = new List<OrderDetails>();
+    {
+        public List<OrderDetails> List { set; get; } = new List<OrderDetails>();
         public Client Client { set; get; } = new Client();
         public ulong Id { set; get; }
-		public static ulong Ids = 1919810114514;
+        private static ulong _ids;
+        public static ulong Ids
+        {
+            set => _ids = Ids;
+            get
+            {
+                var time = DateTime.Now;
+                var res = Convert.ToUInt64(time.ToString("yyyyMMddHHmmssfff"));
+                return res;
+            }
+        }
         public decimal Cost
         {
             get
@@ -28,9 +38,9 @@ namespace Program1
             }
         }
 
-		public Order()
-		{
-		}
+        public Order()
+        {
+        }
 
         public Order(Order order)
         {
@@ -39,22 +49,22 @@ namespace Program1
             Id = order.Id;
         }
 
-		public Order(Client client)
-		{
-			Client = client;
+        public Order(Client client)
+        {
+            Client = client;
             Id = Ids++;
         }
 
-		public void AddOrderDetails(OrderDetails orderDetails)
-		{
+        public void AddOrderDetails(OrderDetails orderDetails)
+        {
             List.Add(orderDetails);
-		}
+        }
 
-		public bool RemoveOrderDetails(int index)
-		{
-			if (index < 0 || index > List.Count) return false;
+        public bool RemoveOrderDetails(int index)
+        {
+            if (index < 0 || index > List.Count) return false;
             List.RemoveAt(index);
-			return true;
+            return true;
         }
 
         public override string ToString()

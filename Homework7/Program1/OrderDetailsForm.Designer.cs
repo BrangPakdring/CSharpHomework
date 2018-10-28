@@ -104,7 +104,7 @@
             // orderIdLabel
             // 
             this.orderIdLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.orderIdLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.orderIdLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.orderIdLabel.Location = new System.Drawing.Point(0, 23);
             this.orderIdLabel.Name = "orderIdLabel";
             this.orderIdLabel.Size = new System.Drawing.Size(216, 39);
@@ -166,7 +166,7 @@
             // costLabel
             // 
             this.costLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.costLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.costLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.costLabel.Location = new System.Drawing.Point(0, 23);
             this.costLabel.Name = "costLabel";
             this.costLabel.Size = new System.Drawing.Size(216, 39);

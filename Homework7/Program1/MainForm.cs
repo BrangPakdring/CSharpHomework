@@ -59,7 +59,7 @@ namespace Program1
             Dispose();
         }
 
-        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
@@ -119,6 +119,60 @@ namespace Program1
         private void NewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             orderService.RemoveAll(o => o is Order);
+            Refresh(sender, e);
+        }
+
+        private void SaveToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            orderService.ExportList();
+        }
+
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Thank you for using.", "About");
+        }
+
+        private void FindOrderButton_Click(object sender, EventArgs e)
+        {
+            List<Func<Order, bool>> funcs = new List<Func<Order, bool>>();
+            if (clientNameTextBox.Text != "")
+            {
+                funcs.Add(order => order.Client.Name == clientNameTextBox.Text);
+            }
+            try
+            {
+                if (costFromTextBox.Text != "")
+                {
+                    funcs.Add(order => order.Cost >= Convert.ToDecimal(costFromTextBox.Text));
+                }
+                if (costToTextBox.Text != "")
+                {
+                    funcs.Add(order => order.Cost < Convert.ToDecimal(costToTextBox.Text));
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Invalid range number");
+            }
+
+            if (funcs.Count == 0)
+            {
+                orderBindingSource.DataSource = orderService.List;
+            }
+            else
+            {
+                orderBindingSource.DataSource =
+                    orderService.FindAll(order =>
+                    {
+                        var res = true;
+                        foreach (var cond in funcs) res &= cond(order);
+                        return res;
+                    });
+            }
+        }
+
+        private void ResetOrderButton_Click(object sender, EventArgs e)
+        {
             Refresh(sender, e);
         }
     }
