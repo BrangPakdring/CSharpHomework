@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Program1
 {
-    public partial class AddOrderForm : Form
+    public partial class OrderDetailsForm : Form
     {
         /// <summary>
         /// Current editing order.
@@ -45,10 +45,10 @@ namespace Program1
         /// </summary>
         int modifyIndex;
 
-        public AddOrderForm()
+        public OrderDetailsForm()
         {
             InitializeComponent();
-            Order = new Order();
+            Order = new Order(new Client(""));
             enterType = EnterType.Add;
         }
 
@@ -57,7 +57,7 @@ namespace Program1
         /// </summary>
         /// <param name="order"></param>
         /// <param name="index"></param>
-        public AddOrderForm(Order order, int index)
+        public OrderDetailsForm(Order order, int index)
         {
             InitializeComponent();
             Order = order;

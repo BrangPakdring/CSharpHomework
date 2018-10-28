@@ -9,11 +9,10 @@ namespace Program1
 	public class Client : Person
 	{
 		public Client() : base()
-		{
-            Id = Ids++;
+        {
         }
 
-		public Client(string name) : base(name)
+        public Client(string name)
 		{
             Id = Ids++;
 		}

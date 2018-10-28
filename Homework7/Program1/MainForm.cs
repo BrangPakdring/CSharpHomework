@@ -28,7 +28,7 @@ namespace Program1
 
         private void AddOrderButton_Click(object sender, EventArgs e)
         {
-            new AddOrderForm().ShowDialog();
+            new OrderDetailsForm().ShowDialog();
             Refresh(sender, e);
         }
 
@@ -72,7 +72,7 @@ namespace Program1
             {
                 try
                 {
-                    orderService.SaveStatus(saveFileDialog.FileName);
+                    orderService.ExportList(saveFileDialog.FileName);
                 }
                 catch
                 {
@@ -94,7 +94,8 @@ namespace Program1
             {
                 try
                 {
-                    orderService.ReadStatus(openFileDialog.FileName);
+                    orderService.ImportList(openFileDialog.FileName);
+                    Refresh(sender, e);
                 }
                 catch
                 {
@@ -111,13 +112,13 @@ namespace Program1
                 return;
             }
             var row = orderDataGridView.SelectedRows[0];
-            new AddOrderForm(row.DataBoundItem as Order, row.Index).ShowDialog();
+            new OrderDetailsForm(row.DataBoundItem as Order, row.Index).ShowDialog();
             Refresh(sender, e);
         }
 
         private void NewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            orderService.RemoveAll(o => o != null);
+            orderService.RemoveAll(o => o is Order);
             Refresh(sender, e);
         }
     }

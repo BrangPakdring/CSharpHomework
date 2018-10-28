@@ -1,6 +1,6 @@
 ﻿namespace Program1
 {
-    partial class AddOrderForm
+    partial class OrderDetailsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -69,16 +69,16 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 68);
+            this.panel1.Size = new System.Drawing.Size(782, 68);
             this.panel1.TabIndex = 0;
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.41522F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.41523F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.41523F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.75432F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.49051F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.49052F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.49052F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.52845F));
             this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel3, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel4, 2, 0);
@@ -88,7 +88,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 68F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 68);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(782, 68);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel2
@@ -98,7 +98,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(229, 62);
+            this.panel2.Size = new System.Drawing.Size(216, 62);
             this.panel2.TabIndex = 0;
             // 
             // orderIdLabel
@@ -107,7 +107,7 @@
             this.orderIdLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.orderIdLabel.Location = new System.Drawing.Point(0, 23);
             this.orderIdLabel.Name = "orderIdLabel";
-            this.orderIdLabel.Size = new System.Drawing.Size(229, 39);
+            this.orderIdLabel.Size = new System.Drawing.Size(216, 39);
             this.orderIdLabel.TabIndex = 1;
             this.orderIdLabel.Text = "0";
             this.orderIdLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -117,7 +117,7 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Top;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(229, 23);
+            this.label1.Size = new System.Drawing.Size(216, 23);
             this.label1.TabIndex = 0;
             this.label1.Text = "Order ID:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -127,18 +127,19 @@
             this.panel3.Controls.Add(this.clientTextBox);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(238, 3);
+            this.panel3.Location = new System.Drawing.Point(225, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(229, 62);
+            this.panel3.Size = new System.Drawing.Size(216, 62);
             this.panel3.TabIndex = 1;
             // 
             // clientTextBox
             // 
+            this.clientTextBox.AcceptsReturn = true;
             this.clientTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.clientTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.clientTextBox.Location = new System.Drawing.Point(0, 23);
             this.clientTextBox.Name = "clientTextBox";
-            this.clientTextBox.Size = new System.Drawing.Size(229, 30);
+            this.clientTextBox.Size = new System.Drawing.Size(216, 30);
             this.clientTextBox.TabIndex = 2;
             this.clientTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -147,7 +148,7 @@
             this.label2.Dock = System.Windows.Forms.DockStyle.Top;
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(229, 23);
+            this.label2.Size = new System.Drawing.Size(216, 23);
             this.label2.TabIndex = 1;
             this.label2.Text = "Client:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -157,9 +158,9 @@
             this.panel4.Controls.Add(this.costLabel);
             this.panel4.Controls.Add(this.label3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(473, 3);
+            this.panel4.Location = new System.Drawing.Point(447, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(229, 62);
+            this.panel4.Size = new System.Drawing.Size(216, 62);
             this.panel4.TabIndex = 2;
             // 
             // costLabel
@@ -168,7 +169,7 @@
             this.costLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.costLabel.Location = new System.Drawing.Point(0, 23);
             this.costLabel.Name = "costLabel";
-            this.costLabel.Size = new System.Drawing.Size(229, 39);
+            this.costLabel.Size = new System.Drawing.Size(216, 39);
             this.costLabel.TabIndex = 3;
             this.costLabel.Text = "0";
             this.costLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -178,7 +179,7 @@
             this.label3.Dock = System.Windows.Forms.DockStyle.Top;
             this.label3.Location = new System.Drawing.Point(0, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(229, 23);
+            this.label3.Size = new System.Drawing.Size(216, 23);
             this.label3.TabIndex = 2;
             this.label3.Text = "Cost:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -186,9 +187,9 @@
             // confirmButton
             // 
             this.confirmButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.confirmButton.Location = new System.Drawing.Point(708, 3);
+            this.confirmButton.Location = new System.Drawing.Point(669, 3);
             this.confirmButton.Name = "confirmButton";
-            this.confirmButton.Size = new System.Drawing.Size(89, 62);
+            this.confirmButton.Size = new System.Drawing.Size(110, 62);
             this.confirmButton.TabIndex = 3;
             this.confirmButton.Text = "Confirm";
             this.confirmButton.UseVisualStyleBackColor = true;
@@ -201,7 +202,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 68);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(800, 382);
+            this.panel5.Size = new System.Drawing.Size(782, 485);
             this.panel5.TabIndex = 1;
             // 
             // panel7
@@ -210,7 +211,7 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(0, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(790, 382);
+            this.panel7.Size = new System.Drawing.Size(772, 485);
             this.panel7.TabIndex = 1;
             // 
             // dataGridView1
@@ -228,41 +229,37 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(790, 382);
+            this.dataGridView1.Size = new System.Drawing.Size(772, 485);
             this.dataGridView1.TabIndex = 0;
             // 
             // costDataGridViewTextBoxColumn
             // 
-            this.costDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.costDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.costDataGridViewTextBoxColumn.DataPropertyName = "Cost";
             this.costDataGridViewTextBoxColumn.HeaderText = "Cost";
             this.costDataGridViewTextBoxColumn.Name = "costDataGridViewTextBoxColumn";
             this.costDataGridViewTextBoxColumn.ReadOnly = true;
-            this.costDataGridViewTextBoxColumn.Width = 65;
             // 
             // Count
             // 
-            this.Count.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Count.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Count.DataPropertyName = "Count";
             this.Count.HeaderText = "Count";
             this.Count.Name = "Count";
-            this.Count.Width = 74;
             // 
             // ProductPrice
             // 
-            this.ProductPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ProductPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ProductPrice.DataPropertyName = "ProductPrice";
             this.ProductPrice.HeaderText = "Product Price";
             this.ProductPrice.Name = "ProductPrice";
-            this.ProductPrice.Width = 122;
             // 
             // ProductName
             // 
-            this.ProductName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ProductName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ProductName.DataPropertyName = "ProductName";
             this.ProductName.HeaderText = "Product Name";
             this.ProductName.Name = "ProductName";
-            this.ProductName.Width = 127;
             // 
             // orderDetailsBindingSource
             // 
@@ -271,26 +268,26 @@
             // panel6
             // 
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(790, 0);
+            this.panel6.Location = new System.Drawing.Point(772, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(10, 382);
+            this.panel6.Size = new System.Drawing.Size(10, 485);
             this.panel6.TabIndex = 0;
             // 
             // orderBindingSource
             // 
             this.orderBindingSource.DataSource = typeof(Program1.Order);
             // 
-            // AddOrderForm
+            // OrderDetailsForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(782, 553);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel1);
             this.MinimumSize = new System.Drawing.Size(600, 400);
-            this.Name = "AddOrderForm";
-            this.Text = "Add Order";
+            this.Name = "OrderDetailsForm";
+            this.Text = "Order Details";
             this.Load += new System.EventHandler(this.AddOrderForm_Load);
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);

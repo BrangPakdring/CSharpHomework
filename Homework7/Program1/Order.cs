@@ -11,7 +11,7 @@ namespace Program1
 	{
 		public List<OrderDetails> List { set; get; } = new List<OrderDetails>();
         public Client Client { set; get; } = new Client();
-        public ulong Id { set; get; } = Ids++;
+        public ulong Id { set; get; }
 		public static ulong Ids = 1919810114514;
         public decimal Cost
         {
@@ -30,19 +30,20 @@ namespace Program1
 
 		public Order()
 		{
-
 		}
 
         public Order(Order order)
         {
             List = new List<OrderDetails>(order.List);
             Client = new Client(order.Client);
+            Id = order.Id;
         }
 
 		public Order(Client client)
 		{
 			Client = client;
-		}
+            Id = Ids++;
+        }
 
 		public void AddOrderDetails(OrderDetails orderDetails)
 		{

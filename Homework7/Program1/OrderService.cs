@@ -10,25 +10,29 @@ namespace Program1
 {
 	public class OrderService
 	{
-		#region Constructor and instance
+		#region Construct Service
 
 		private OrderService()
-		{
-			ReadStatus();
+        {
+            LoadServiceStatus();
+            ImportList();
 		}
 
 		~OrderService()
-		{
-			SaveStatus();
+        {
+            SaveServiceStatus();
+            ExportList();
 		}
 
 		private static OrderService _instance;
 
 		public static OrderService GetInstance() => _instance ?? (_instance = new OrderService());
 
-		#endregion
+        #endregion
 
-		public static string SavingPath { set; get; } = "./OrderService.xml";
+        private static readonly string StatusPath = "./.ServiceStatus";
+
+        public static string SavingPath { set; get; }
 
 		private List<Order> _list { set; get; } = new List<Order>();
 
@@ -66,24 +70,52 @@ namespace Program1
 			return true;
 		}
 
-		public void SaveStatus(string path = "./list.xml")
-		{
-			var xmlSerializer = new XmlSerializer(_list.GetType());
-			using (var fileStream = new FileStream(path, FileMode.Create))
+		public void ExportList(string path = null)
+        {
+            SavingPath = path ?? "./tmp.xml";
+            var xmlSerializer = new XmlSerializer(_list.GetType());
+			using (var fileStream = new FileStream(SavingPath, FileMode.Create))
 				xmlSerializer.Serialize(fileStream, _list);
 		}
 
-		public void ReadStatus(string path = "./list.xml")
+		public void ImportList(string path = null)
 		{
-			var xmlSerializer = new XmlSerializer(_list.GetType());
-			using (var fileStream = new FileStream(path, FileMode.Open))
+            SavingPath = path ?? "./tmp.xml";
+            var xmlSerializer = new XmlSerializer(_list.GetType());
+            if (File.Exists(SavingPath) == false) return;
+			using (var fileStream = new FileStream(SavingPath, FileMode.Open))
                 _list = (List<Order>) xmlSerializer.Deserialize(fileStream);
 		}
 
-		public void ClearStatus(string path = "./list.xml")
-		{
-			if (File.Exists(path)) File.Delete(path);
+		public void ClearList(string path = null)
+        {
+            SavingPath = path ?? "./tmp.xml";
+            if (File.Exists(SavingPath)) File.Delete(SavingPath);
             _instance._list.Clear();
 		}
+
+        private void SaveServiceStatus()
+        {
+            using (var streamWriter = new StreamWriter(StatusPath))
+            {
+                streamWriter.WriteLine(SavingPath);
+                streamWriter.WriteLine(Order.Ids);
+                streamWriter.WriteLine(Client.Ids);
+            }
+        }
+
+        private void LoadServiceStatus()
+        {
+            try
+            {
+                using (var streamReader = new StreamReader(StatusPath))
+                {
+                    SavingPath = streamReader.ReadLine();
+                    Order.Ids = Convert.ToUInt64(streamReader.ReadLine());
+                    Client.Ids = Convert.ToUInt64(streamReader.ReadLine());
+                }
+            }
+            catch { }
+        }
 	}
 }
