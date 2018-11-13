@@ -184,5 +184,12 @@ namespace Program1
 			currentList = null;
 			Refresh(sender, e);
 		}
+
+		private void SaveAsHTMLToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			orderService.ExportList();
+			orderService.ExportHTML(orderService.SavingPath, "OrderList.xslt", "./tmp.html");
+
+		}
 	}
 }

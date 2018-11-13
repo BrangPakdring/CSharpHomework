@@ -4,7 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
+using System.Xml.XPath;
+using System.Xml.Xsl;
 
 namespace Program1
 {
@@ -32,7 +35,7 @@ namespace Program1
 
 		private static readonly string StatusPath = "./.ServiceStatus";
 
-		public static string SavingPath { set; get; }
+		public string SavingPath { set; get; }
 
 		private List<Order> _list { set; get; } = new List<Order>();
 
@@ -68,6 +71,34 @@ namespace Program1
 			if (index < 0 || index >= _list.Count) return false;
 			_list[index] = order;
 			return true;
+		}
+
+		public void ExportHTML(string pathXML, string pathXSLT, string pathHTML)
+		{
+			try
+			{
+				XmlDocument xmlDocument = new XmlDocument();
+				xmlDocument.Load(pathXML);
+
+				XPathNavigator xPathNavigator = xmlDocument.CreateNavigator();
+				xPathNavigator.MoveToRoot();
+
+				XslCompiledTransform xslCompiledTransform = new XslCompiledTransform();
+				xslCompiledTransform.Load(pathXSLT);
+
+				FileStream fileStream = File.OpenWrite(pathHTML);
+				XmlTextWriter xmlTextWriter = new XmlTextWriter(fileStream, Encoding.Default);
+
+				xslCompiledTransform.Transform(xPathNavigator, null, xmlTextWriter);
+			}
+			catch(XmlException e)
+			{
+				Console.Error.WriteLine(e);
+			}
+			catch (XsltException e)
+			{
+				Console.Error.WriteLine(e);
+			}
 		}
 
 		public void ExportList(string path = null)

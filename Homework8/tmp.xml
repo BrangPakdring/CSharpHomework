@@ -27,6 +27,7 @@
       <Id>908</Id>
     </Client>
     <Id>20181113297</Id>
+    <Cost>22</Cost>
   </Order>
   <Order>
     <List>
@@ -73,6 +74,7 @@
       <Id>911</Id>
     </Client>
     <Id>20181113648</Id>
+    <Cost>188</Cost>
   </Order>
   <Order>
     <List>
@@ -92,5 +94,6 @@
       <Id>915</Id>
     </Client>
     <Id>20181113139</Id>
+    <Cost>2</Cost>
   </Order>
 </ArrayOfOrder>

@@ -18,17 +18,19 @@ namespace Program1
 			set => _ids = value;
 			get => _ids;
 		}
+		private decimal _cost = 0;
 		public decimal Cost
 		{
+			set => _cost = value;
 			get
 			{
 				try
 				{
-					return List.Sum(orderDetails => orderDetails.Cost);
+					return _cost = List.Sum(orderDetails => orderDetails.Cost);
 				}
 				catch (NullReferenceException)
 				{
-					return 0;
+					return _cost = 0;
 				}
 			}
 		}

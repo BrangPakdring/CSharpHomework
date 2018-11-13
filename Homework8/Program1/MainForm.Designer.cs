@@ -70,6 +70,7 @@
 			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.saveAsHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip.SuspendLayout();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.orderDataGridView)).BeginInit();
@@ -92,8 +93,8 @@
 			// 
 			this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
 			this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.fileToolStripMenuItem,
-			this.aboutToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.aboutToolStripMenuItem});
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip.Name = "menuStrip";
 			this.menuStrip.Size = new System.Drawing.Size(782, 28);
@@ -103,13 +104,14 @@
 			// fileToolStripMenuItem
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.newToolStripMenuItem,
-			this.openToolStripMenuItem,
-			this.toolStripSeparator2,
-			this.saveToolStripMenuItem1,
-			this.saveAsToolStripMenuItem,
-			this.toolStripSeparator1,
-			this.exitToolStripMenuItem});
+            this.newToolStripMenuItem,
+            this.openToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.saveToolStripMenuItem1,
+            this.saveAsToolStripMenuItem,
+            this.saveAsHTMLToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F)));
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
@@ -119,7 +121,7 @@
 			// 
 			this.newToolStripMenuItem.Name = "newToolStripMenuItem";
 			this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-			this.newToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+			this.newToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
 			this.newToolStripMenuItem.Text = "New";
 			this.newToolStripMenuItem.Click += new System.EventHandler(this.NewToolStripMenuItem_Click);
 			// 
@@ -127,41 +129,42 @@
 			// 
 			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
 			this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-			this.openToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+			this.openToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
 			this.openToolStripMenuItem.Text = "Open";
 			this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator2
 			// 
 			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(211, 6);
+			this.toolStripSeparator2.Size = new System.Drawing.Size(213, 6);
 			// 
 			// saveToolStripMenuItem1
 			// 
 			this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-			this.saveToolStripMenuItem1.Size = new System.Drawing.Size(214, 26);
+			this.saveToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+			this.saveToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
 			this.saveToolStripMenuItem1.Text = "Save";
 			this.saveToolStripMenuItem1.Click += new System.EventHandler(this.SaveToolStripMenuItem1_Click);
 			// 
 			// saveAsToolStripMenuItem
 			// 
 			this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-			this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt)
-			| System.Windows.Forms.Keys.S)));
-			this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+			this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.S)));
+			this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
 			this.saveAsToolStripMenuItem.Text = "Save As";
 			this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(211, 6);
+			this.toolStripSeparator1.Size = new System.Drawing.Size(213, 6);
 			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
 			this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
 			this.exitToolStripMenuItem.Text = "Exit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
 			// 
@@ -190,9 +193,9 @@
 			this.orderDataGridView.AutoGenerateColumns = false;
 			this.orderDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.orderDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-			this.idDataGridViewTextBoxColumn,
-			this.clientDataGridViewTextBoxColumn,
-			this.costDataGridViewTextBoxColumn});
+            this.idDataGridViewTextBoxColumn,
+            this.clientDataGridViewTextBoxColumn,
+            this.costDataGridViewTextBoxColumn});
 			this.orderDataGridView.DataSource = this.orderBindingSource;
 			this.orderDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.orderDataGridView.Location = new System.Drawing.Point(0, 0);
@@ -478,6 +481,13 @@
 			this.dataGridViewTextBoxColumn8.HeaderText = "Client";
 			this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
 			// 
+			// saveAsHTMLToolStripMenuItem
+			// 
+			this.saveAsHTMLToolStripMenuItem.Name = "saveAsHTMLToolStripMenuItem";
+			this.saveAsHTMLToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+			this.saveAsHTMLToolStripMenuItem.Text = "Save As HTML";
+			this.saveAsHTMLToolStripMenuItem.Click += new System.EventHandler(this.SaveAsHTMLToolStripMenuItem_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -548,6 +558,7 @@
 		private System.Windows.Forms.TextBox costToTextBox;
 		private System.Windows.Forms.Button findOrderButton;
 		private System.Windows.Forms.Button resetOrderButton;
+		private System.Windows.Forms.ToolStripMenuItem saveAsHTMLToolStripMenuItem;
 	}
 }
 
