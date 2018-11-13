@@ -22,3 +22,5 @@ Repo for my C# Homework
 	* Program1Test1: MSTest based unit test to Program1
 * Homework7
 	* Program1: Order Mgr WinForm UI 
+* Homework8
+	* Program1: Order Mgr data validity check; Export orders to HTML via XSLT based XML
