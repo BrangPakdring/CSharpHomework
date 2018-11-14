@@ -23,7 +23,7 @@
 					<xsl:for-each select="Order">
 						<hr/>
 						Id: <xsl:value-of select="Id"/><br/>
-						Client: <xsl:value-of select="Client/Name"/> Phone: <xsl:value-of select="Client/PhoneNumber"/><br/>
+						Client: <xsl:value-of select="Client/Name"/>, Phone: <xsl:value-of select="Client/PhoneNumber"/><br/>
 						Cost: <xsl:value-of select="Cost"/><br/>
 						Details: 						
 						<ul>

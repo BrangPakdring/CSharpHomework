@@ -187,9 +187,25 @@ namespace Program1
 
 		private void SaveAsHTMLToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			orderService.ExportList();
-			orderService.ExportHTML(orderService.SavingPath, "OrderList.xslt", "./tmp.html");
+			SaveFileDialog saveFileDialog = new SaveFileDialog
+			{
+				InitialDirectory = Directory.GetCurrentDirectory(),
+				Filter = "All Files (*.*)|*.*|HTML File (*.html)|*.html",
+				FilterIndex = 2
+			};
 
+			if (saveFileDialog.ShowDialog() == DialogResult.OK)
+			{
+				try
+				{
+					orderService.ExportList();
+					orderService.ExportHTML(orderService.SavingPath, "OrderList.xslt", saveFileDialog.FileName);
+				}
+				catch
+				{
+					MessageBox.Show("Error occurs while saving data.", "Error");
+				}
+			}
 		}
 	}
 }

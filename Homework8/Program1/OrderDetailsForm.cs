@@ -216,19 +216,6 @@ namespace Program1
 			return CheckOrderIdValidity(ref msg) 
 				&& CheckClientNameValidity(ref msg) 
 				&& CheckClientPhoneNumberValidity(ref msg);
-/*			if (CheckOrderIdValidity(ref msg)==false)
-			{
-				return false;
-			}
-			if (CheckClientNameValidity(ref msg) == false)
-			{
-				return false;
-			}
-			if (CheckClientPhoneNumberValidity(ref msg) == false)
-			{
-				return false;
-			}
-			return true;*/
 		}
 
 		private bool CheckOrderIdValidity(ref string msg)
