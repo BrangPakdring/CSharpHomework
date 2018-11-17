@@ -11,12 +11,24 @@ namespace Program1
 {
 	internal class Program
 	{
-		private const ushort PageLimit = 10;
+		private const ushort PageLimit = 100;
 		private Hashtable _urls;
 		private int _count;
+		private string startURL = "https://blog.csdn.net/lttree/article/category/2397059";
+
+		public Program()
+		{
+			_urls = Hashtable.Synchronized(new Hashtable());
+			_count = 0;
+			_urls.Add(startURL, false);
+		}
+
 		public static void Main(string[] args)
 		{
+			Console.WriteLine("Test using single thread:");
 			new Program().Run(false);
+			Console.WriteLine();
+			Console.WriteLine("Test using multiple thread:");
 			new Program().Run(true);
 			
 		}
@@ -24,10 +36,6 @@ namespace Program1
 		void Run(bool parallel = false)
 		{
 			Program program = new Program();
-			program._urls = new Hashtable();
-			program._count = 0;
-			string startURL = "https://www.cnblogs.com/dstang2000/";
-			program._urls.Add(startURL, false);
 			
 			Stopwatch stopwatch = new Stopwatch();
 			Thread thread = new Thread(() => program.Crawl(parallel));
@@ -35,7 +43,20 @@ namespace Program1
 			Console.WriteLine("Start crawling.");
 			stopwatch.Start();
 			thread.Start();
-			thread.Join();
+//			thread.Join();
+			int cnt = 0;
+			while (program._count < PageLimit)
+			{
+				Console.WriteLine("Waiting...");
+				Thread.Sleep(1000);
+				++cnt;
+				if (cnt > 20)
+				{
+					Console.WriteLine("Time limit exceeded.");
+					break;
+				}
+			}
+			
 			stopwatch.Stop();
 			Console.WriteLine("Time elapsed: " + stopwatch.ElapsedMilliseconds + ".");
 		}
@@ -46,19 +67,21 @@ namespace Program1
 			do
 			{
 				string current = null;
-				foreach (DictionaryEntry dictionaryEntry in _urls)
+				lock (this)
 				{
-					if ((bool) dictionaryEntry.Value) continue;
-					current = dictionaryEntry.Key as string;
-					break;
+					foreach (DictionaryEntry dictionaryEntry in _urls)
+					{
+						if ((bool) dictionaryEntry.Value) continue;
+						current = dictionaryEntry.Key as string;
+						_urls[current] = true;
+						++_count;
+						break;
+					}
 				}
 
-				if (current == null || _count > PageLimit) return;
+				if (current == null || _count >= PageLimit) return;
 				Console.WriteLine("Crawling: " + current);
 				html = Download(current);
-
-				_urls[current] = true;
-				++_count;
 
 				/*if (!parallel)*/
 				Parse(html);
@@ -66,9 +89,10 @@ namespace Program1
 				if (parallel)
 				{
 					/*Parse(html);*/
+//					ThreadPool.QueueUserWorkItem(new WaitCallback(this.Crawl), true))
 					var thread = new Thread(() => this.Crawl(true));
 					thread.Start();
-					thread.Join();
+//					thread.Join();
 				}
 			} while (true);
 		}
@@ -82,7 +106,10 @@ namespace Program1
 				strRef = match.Value.Substring(match.Value.IndexOf('=') + 1).Trim('"', '#', ' ', '>');
 				if (strRef.Length == 0) continue;
 				if (strRef.StartsWith("https://") == false) continue;
-				if (_urls[strRef] == null) _urls[strRef] = false;
+				lock (this)
+				{
+					if (_urls[strRef] == null) _urls[strRef] = false;
+				}
 			}
 		}
 
@@ -99,7 +126,7 @@ namespace Program1
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e);
+//				Console.WriteLine(e);
 				return "";
 			}
 		}
