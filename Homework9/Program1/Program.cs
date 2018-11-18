@@ -21,12 +21,24 @@ namespace Program1
 			Console.WriteLine("Test using optimized thread:");
 			new Program().Run(true);
 		}
+		
+		/**
+		 * Crawling speed depends on network environment and its stability, so
+		 * I am not sure whether the optimization itself does the acceleration.
+		 * (Sometimes the parallel slows down the process.) 
+		 * 
+		 * Also too many threads would be harmful to machine.
+		 * 
+		 * Though there might be any better optimization, this is from the many
+		 * tries the best one being tested yet in my own machine, with the
+		 * result exported to two text files output1.txt & output2.txt.
+		 */
 
 		private const uint ThreadLimit = 128;
 		
 		private const ushort PageLimit = 500;
 
-		private const uint TimeLimit = 50;
+		private const uint TimeLimit = 15;
 
 		private Hashtable _urls;
 
@@ -96,12 +108,19 @@ namespace Program1
 			{
 				string current = null;
 				int count;
-				foreach (DictionaryEntry dictionaryEntry in _urls)
+				try
 				{
-					if ((bool) dictionaryEntry.Value) continue;
-					current = dictionaryEntry.Key as string;
-					if (current == null) continue;
-					break;
+					foreach (DictionaryEntry dictionaryEntry in _urls)
+					{
+						if ((bool) dictionaryEntry.Value) continue;
+						current = dictionaryEntry.Key as string;
+						if (current == null) continue;
+						break;
+					}
+				}
+				catch (InvalidOperationException e)
+				{
+					continue;
 				}
 
 				lock (this)
@@ -113,20 +132,9 @@ namespace Program1
 					count = _count;
 				}
 
-				Console.WriteLine("Crawling #" + _count + ": " + current);
+				Console.WriteLine("Crawling #" + count + ": " + current);
 				html = Download(current, count);
 				Parse(html, parallel);
-
-//				if (parallel)
-//				{
-//					lock (this)
-//					{
-//						var thread = new Thread(() => this.Crawl(true));
-//						thread.Name = _count.ToString();
-//						_threads.Add(thread);
-//						thread.Start();
-//					}
-//				}
 			}
 		}
 
