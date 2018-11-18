@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -12,15 +13,18 @@ namespace Program1
 	internal class Program
 	{
 		private const ushort PageLimit = 100;
+		private const uint TimeLimit = 20;
 		private Hashtable _urls;
 		private int _count;
 		private string startURL = "https://blog.csdn.net/lttree/article/category/2397059";
+		private List<Thread> _threads;
 
 		public Program()
 		{
 			_urls = Hashtable.Synchronized(new Hashtable());
 			_count = 0;
 			_urls.Add(startURL, false);
+			_threads = new List<Thread>();
 		}
 
 		public static void Main(string[] args)
@@ -39,6 +43,7 @@ namespace Program1
 			
 			Stopwatch stopwatch = new Stopwatch();
 			Thread thread = new Thread(() => program.Crawl(parallel));
+			_threads.Add(thread);
 
 			Console.WriteLine("Start crawling.");
 			stopwatch.Start();
@@ -47,14 +52,19 @@ namespace Program1
 			int cnt = 0;
 			while (program._count < PageLimit)
 			{
-				Console.WriteLine("Waiting...");
-				Thread.Sleep(1000);
+				Console.WriteLine("Waiting... " + cnt + "s.");
 				++cnt;
-				if (cnt > 20)
+				if (cnt > TimeLimit)
 				{
 					Console.WriteLine("Time limit exceeded.");
+					foreach (var thread1 in _threads)
+					{
+						thread1.Abort();
+					}
+
 					break;
 				}
+				Thread.Sleep(1000);
 			}
 			
 			stopwatch.Stop();
@@ -80,8 +90,8 @@ namespace Program1
 				}
 
 				if (current == null || _count >= PageLimit) return;
-				Console.WriteLine("Crawling: " + current);
-				html = Download(current);
+				Console.WriteLine("Crawling #" + _count + ": " + current);
+				html = Download(current, _count);
 
 				/*if (!parallel)*/
 				Parse(html);
@@ -91,6 +101,7 @@ namespace Program1
 					/*Parse(html);*/
 //					ThreadPool.QueueUserWorkItem(new WaitCallback(this.Crawl), true))
 					var thread = new Thread(() => this.Crawl(true));
+					_threads.Add(thread);
 					thread.Start();
 //					thread.Join();
 				}
@@ -113,14 +124,14 @@ namespace Program1
 			}
 		}
 
-		private string Download(string url)
+		private string Download(string url, int index)
 		{
 			try
 			{
 				WebClient webClient = new WebClient();
 				webClient.Encoding = Encoding.UTF8;
 				string html = webClient.DownloadString(url);
-				string fileName = _count.ToString();
+				string fileName = index + ".html";
 				File.WriteAllText(fileName, html, Encoding.UTF8);
 				return html;
 			}
