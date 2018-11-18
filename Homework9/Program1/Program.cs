@@ -28,7 +28,7 @@ namespace Program1
 			Console.WriteLine("Test using single thread:");
 			new Program().Run(false);
 			Console.WriteLine();
-			Console.WriteLine("Test using multiple thread:");
+			Console.WriteLine("Test using optimized thread:");
 			new Program().Run(true);
 			
 		}
