@@ -11,25 +11,27 @@ using System.Threading.Tasks;
 
 namespace Program1
 {
-	internal class Program
+	public class Program
 	{
 		public static void Main(string[] args)
 		{
-			Console.WriteLine("Test using single thread:");
-			new Program().Run(false);
-			Console.WriteLine();
-			Console.WriteLine("Test using optimized thread:");
-			new Program().Run(true);
+			if (args.Length > 0 && args[0] == "-o")
+			{
+				Console.WriteLine("Test using optimized thread:");
+				new Program().Run(true);
+			}
+			else
+			{
+				Console.WriteLine("Test using single thread:");
+				new Program().Run(false);
+			}
 		}
 		
 		/**
 		 * Crawling speed depends on network environment and its stability, so
-		 * I am not sure whether the optimization itself does the acceleration.
-		 * (Sometimes the parallel slows down the process.) 
+		 * I am not pretty sure whether the optimization plays a role. 
 		 * 
-		 * Also too many threads would be harmful to machine.
-		 * 
-		 * Though there might be any better optimization, this is from the many
+		 * Though there might be any better optimization, this is from my many
 		 * tries the best one being tested yet in my own machine, with the
 		 * result exported to two text files output1.txt & output2.txt.
 		 */
@@ -56,7 +58,7 @@ namespace Program1
 			_threads = new List<Thread>();
 		}
 
-		void Run(bool parallel)
+		public void Run(bool parallel)
 		{
 			Program program = new Program();
 
