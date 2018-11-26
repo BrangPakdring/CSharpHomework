@@ -11,39 +11,38 @@ namespace Program1
 	public class OrderDetails
 	{
         [Key]
-        public long Id { set; get; }
-		public Product Product { set; get; } = new Product();
-		public string ProductName { set => Product.Name = value; get => Product.Name; }
-		public decimal ProductPrice
-		{
-			set => Product.Price = value;
-			get => Product.Price;
-		}
+        public string Id { set; get; }
+		public string ProductName { set; get; }
+		public decimal ProductPrice { set; get; }
 		public uint Count
 		{
 			get; set;
 		}
-		public decimal Cost => Count * Product.Price;
+		public decimal Cost => Count * ProductPrice;
 
 		public OrderDetails()
 		{
 		}
 
-		public OrderDetails(Product product, uint count = 1)
+		public OrderDetails(string id, string productName, decimal productPrice, uint count = 1)
 		{
-			Product = product;
+			Id = id;
+			ProductName = productName;
+			ProductPrice = productPrice;
 			Count = count;
 		}
 
 		public override string ToString()
 		{
-			return $"Product: {Product,-20} | Count: {Count,-10} | Cost: {Cost,10}$";
+			var product = $"{ ProductName, -10 } { ProductPrice, 10}";
+			return $"Product: {product,-20} | Count: {Count,-10} | Cost: {Cost,10}$";
 		}
 
 		public override bool Equals(object obj)
 		{
 			return obj is OrderDetails details &&
-				   EqualityComparer<Product>.Default.Equals(Product, details.Product) &&
+				   ProductName == details.ProductName &&
+				   ProductPrice == details.ProductPrice &&
 				   Count == details.Count &&
 				   Cost == details.Cost;
 		}
@@ -51,7 +50,8 @@ namespace Program1
 		public override int GetHashCode()
 		{
 			var hashCode = 738199192;
-			hashCode = hashCode * -1521134295 + EqualityComparer<Product>.Default.GetHashCode(Product);
+			hashCode = hashCode * -1521134295 + ProductName.GetHashCode();
+			hashCode = hashCode * -1521134295 + ProductPrice.GetHashCode();
 			hashCode = hashCode * -1521134295 + Count.GetHashCode();
 			hashCode = hashCode * -1521134295 + Cost.GetHashCode();
 			return hashCode;

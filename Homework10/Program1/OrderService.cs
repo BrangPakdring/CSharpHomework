@@ -41,14 +41,22 @@ namespace Program1
 
 		public List<Order> List { get => new List<Order>(_list); }
 
-		public void AddOrder(Order order) => _list.Add(order);
-
-		public bool RemoveOrder(int index)
+//		public void AddOrder(Order order) => _list.Add(order);
+		public void AddOrder(Order order)
 		{
-			if (index < 0 || index >= _list.Count) return false;
-			_list.RemoveAt(index);
-			return true;
+			using (var db = new OrderDb())
+			{
+				db.Orders.Add(order);
+				db.SaveChanges();
+			}
 		}
+
+//		public bool RemoveOrder(int index)
+//		{
+//			if (index < 0 || index >= _list.Count) return false;
+//			_list.RemoveAt(index);
+//			return true;
+//		}
 
 		public bool RemoveAll(Predicate<Order> match)
 		{
@@ -63,8 +71,15 @@ namespace Program1
 			return res;
 		}
 
+//		public List<Order> FindAll(Predicate<Order> match)
+//			=> (from order in _list where match(order) select order).ToList();
 		public List<Order> FindAll(Predicate<Order> match)
-			=> (from order in _list where match(order) select order).ToList();
+		{
+			using (var db = new OrderDb())
+			{
+				return db.Orders.Include("List").Where(o => match(o)).ToList();
+			}
+		}
 
 		public bool ModifyOrder(int index, Order order)
 		{

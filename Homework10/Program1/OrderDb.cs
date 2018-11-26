@@ -12,5 +12,6 @@ namespace Program1
         public OrderDb() : base("OrderDb") { }
         public DbSet<Order> Orders { set; get; }
         public DbSet<OrderDetails> OrderDetails { set; get; }
+		public DbSet<Client> Clients { set; get; }
     }
 }

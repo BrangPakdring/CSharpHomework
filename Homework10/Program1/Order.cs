@@ -14,7 +14,7 @@ namespace Program1
 		public Client Client { set; get; } = new Client();
         [Key]
 		public string Id { set; get; } = DateTime.Now.ToString("yyyyMMddfff");
-//        public static string Ids { set; get; }
+
         private decimal _cost = 0;
 		public decimal Cost
 		{
@@ -48,18 +48,6 @@ namespace Program1
 			Client = client;
 //			Id = Ids++;
 		}
-
-/*		public static bool IsIdValid(string idString)
-		{
-			if (idString.Length != 11 || ulong.TryParse(idString, out ulong id) == false) return false;
-			ulong yyyy = id / 10000000L, MM = id % 10000000L / 100000L, dd = id % 100000L / 1000L;
-			bool leap = (yyyy % 400 == 0 || yyyy % 4 == 0 && yyyy % 100 != 0);
-			var days = new ulong[] { 0, 31, (ulong)(leap ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-			if (MM < 1 || MM > 12) return false;
-			if (dd < 1 || dd > days[MM]) return false;
-//			_ids = idString;
-			return true;
-		}*/
 
 		public void AddOrderDetails(OrderDetails orderDetails)
 		{
