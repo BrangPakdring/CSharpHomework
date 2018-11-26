@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 namespace Program1
 {
 	public class OrderDetails
 	{
-
+        [Key]
+        public long Id { set; get; }
 		public Product Product { set; get; } = new Product();
 		public string ProductName { set => Product.Name = value; get => Product.Name; }
 		public decimal ProductPrice

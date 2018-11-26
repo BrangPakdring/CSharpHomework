@@ -18,6 +18,7 @@ namespace Program1
 		[STAThread]
 		static void Main()
 		{
+            new OrderDb().SaveChanges();
 			SetProcessDPIAware();
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);

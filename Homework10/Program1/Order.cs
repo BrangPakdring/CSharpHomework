@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -11,14 +12,10 @@ namespace Program1
 	{
 		public List<OrderDetails> List { set; get; } = new List<OrderDetails>();
 		public Client Client { set; get; } = new Client();
+        [Key]
 		public string Id { set; get; } = DateTime.Now.ToString("yyyyMMddfff");
-		private static string _ids;
-		public static string Ids
-		{
-			set => _ids = value;
-			get => _ids;
-		}
-		private decimal _cost = 0;
+//        public static string Ids { set; get; }
+        private decimal _cost = 0;
 		public decimal Cost
 		{
 			set => _cost = value;

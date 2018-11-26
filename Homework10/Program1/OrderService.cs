@@ -86,10 +86,11 @@ namespace Program1
 				XslCompiledTransform xslCompiledTransform = new XslCompiledTransform();
 				xslCompiledTransform.Load(pathXSLT);
 
-				FileStream fileStream = File.OpenWrite(pathHTML);
-				XmlTextWriter xmlTextWriter = new XmlTextWriter(fileStream, Encoding.Default);
-
-				xslCompiledTransform.Transform(xPathNavigator, null, xmlTextWriter);
+                using (FileStream fileStream = File.OpenWrite(pathHTML))
+                {
+                    XmlTextWriter xmlTextWriter = new XmlTextWriter(fileStream, Encoding.Default);
+                    xslCompiledTransform.Transform(xPathNavigator, null, xmlTextWriter);
+                }
 			}
 			catch(XmlException e)
 			{
@@ -130,7 +131,7 @@ namespace Program1
 			using (var streamWriter = new StreamWriter(StatusPath))
 			{
 				streamWriter.WriteLine(SavingPath);
-				streamWriter.WriteLine(Order.Ids);
+//				streamWriter.WriteLine(Order.Ids);
 				streamWriter.WriteLine(Client.Ids);
 			}
 		}
@@ -142,7 +143,7 @@ namespace Program1
 				using (var streamReader = new StreamReader(StatusPath))
 				{
 					SavingPath = streamReader.ReadLine();
-					Order.Ids = Convert.ToString(streamReader.ReadLine());
+//					Order.Ids = Convert.ToString(streamReader.ReadLine());
 					Client.Ids = Convert.ToUInt64(streamReader.ReadLine());
 				}
 			}
