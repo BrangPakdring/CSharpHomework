@@ -12,7 +12,9 @@ namespace Program1
 	{
 		public List<OrderDetails> List { set; get; } = new List<OrderDetails>();
 		public Client Client { set; get; } = new Client();
+
         [Key]
+		[StringLength(11)]
 		public string Id { set; get; } = DateTime.Now.ToString("yyyyMMddfff");
 
         private decimal _cost = 0;

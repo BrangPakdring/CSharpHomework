@@ -16,7 +16,7 @@ namespace Program1
 		/// <summary>
 		/// Current editing order.
 		/// </summary>
-		Order Order;
+		Order editingOrder;
 		Order originOrder;
 
 		/// <summary>
@@ -50,7 +50,7 @@ namespace Program1
 		public OrderDetailsForm()
 		{
 			InitializeComponent();
-			Order = new Order(new Client(""));
+			editingOrder = new Order(new Client(""));
 			enterType = EnterType.Add;
 		}
 
@@ -62,26 +62,12 @@ namespace Program1
 		public OrderDetailsForm(Order order, int index)
 		{
 			InitializeComponent();
-			Order = order;
+			editingOrder = new Order(order);
 			enterType = EnterType.Modify;
-			foreach (var e in order.List)
-				orderDetailsBindingSource.List.Add(e);
+//			foreach (var e in order.List)
+//				orderDetailsBindingSource.List.Add(e);
 			modifyIndex = index;
 			originOrder = order;
-		}
-
-		/// <summary>
-		/// Manually refresh the table and total cost identifier... any better solutions??
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Refresh(object sender, EventArgs e)
-		{
-			this.costLabel.DataBindings.Clear();
-			this.costLabel.DataBindings.Add("Text", Order, "Cost");
-
-			this.dataGridView1.Refresh();
-			orderDetailsBindingSource.DataSource = typeof(Program1.OrderDetails);
 		}
 
 		/// <summary>
@@ -91,31 +77,19 @@ namespace Program1
 		/// <param name="e"></param>
 		private void AddOrderForm_Load(object sender, EventArgs e)
 		{
-			costLabel.DataBindings.Add("Text", Order, "Cost");
-			orderIdTextBox.DataBindings.Add("Text", Order, "Id");
-			clientTextBox.DataBindings.Add("Text", Order, "Client.Name");
-			phoneTextBox.DataBindings.Add("Text", Order, "Client.PhoneNumber");
+			costLabel.DataBindings.Add("Text", editingOrder, "Cost");
+			orderIdTextBox.DataBindings.Add("Text", editingOrder, "Id");
+			clientTextBox.DataBindings.Add("Text", editingOrder, "Client.Name");
+			phoneTextBox.DataBindings.Add("Text", editingOrder, "Client.PhoneNumber");
 
-			dataGridView1.UserAddedRow += DataGridView1_UserAddedRow;
-			dataGridView1.UserDeletingRow += DataGridView1_UserDeletingRow;
-			dataGridView1.RowLeave += DataGridView1_RowLeave;
-			dataGridView1.CellBeginEdit += DataGridView1_CellBeginEdit;
+			orderBindingSource.DataSource = editingOrder;
 
 			dataGridView1.DataError += DataGridView1_DataError;
-
-			FormClosing += AddOrderForm_FormClosing;
+			dataGridView1.CellLeave += DataGridView1_CellLeave;
 		}
 
-		private void AddOrderForm_FormClosing(object sender, FormClosingEventArgs e)
+		private void DataGridView1_CellLeave(object sender, DataGridViewCellEventArgs e)
 		{
-			// New order is discarded.
-			//if (e.CloseReason != CloseReason.None) --Order.Ids;
-		}
-
-		private void DataGridView1_CellBeginEdit(object sender, EventArgs e)
-		{
-			if (operationStatus == OperationStatus.Added) return;
-			operationStatus = OperationStatus.Modified;
 		}
 
 		private void DataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -135,49 +109,6 @@ namespace Program1
 		}
 
 		/// <summary>
-		/// Change the status to Added at the beginning of adding.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void DataGridView1_UserAddedRow(object sender, DataGridViewRowEventArgs e)
-		{
-			this.operationStatus = OperationStatus.Added;
-		}
-
-		private void DataGridView1_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
-		{
-			Order.RemoveOrderDetails(e.Row.Index);
-		}
-
-		/// <summary>
-		/// If user leaves current row with new row added, that one will be pended to list.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void DataGridView1_RowLeave(object sender, DataGridViewCellEventArgs e)
-		{
-			if (operationStatus == OperationStatus.Added)
-			{
-				Order.AddOrderDetails(dataGridView1.CurrentRow.DataBoundItem as OrderDetails);
-			}
-			else if (operationStatus == OperationStatus.Modified)
-			{
-				OrderService.GetInstance().ModifyOrder(e.RowIndex, dataGridView1.Rows[e.RowIndex].DataBoundItem as Order);
-			}
-			operationStatus = OperationStatus.Idle;
-			Refresh(sender, e);
-		}
-
-		private void DataGridView1_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-		{
-			var removedRows = this.dataGridView1.SelectedRows;
-			for (var i = removedRows.Count - 1; i >= 0; --i)
-			{
-				Order.RemoveOrderDetails(removedRows[i].Index);
-			}
-		}
-
-		/// <summary>
 		/// Confirm and add the order.
 		/// </summary>
 		/// <param name="sender"></param>
@@ -192,9 +123,10 @@ namespace Program1
 			}
 			if (enterType == EnterType.Modify)
 			{
-				OrderService.GetInstance().RemoveAll(order0 => order0.Equals(originOrder));
+				OrderService.GetInstance().RemoveOrder(originOrder);
+//				OrderService.GetInstance().RemoveAll(order0 => order0.Equals(originOrder));
 			}
-			OrderService.GetInstance().AddOrder(Order);
+			OrderService.GetInstance().AddOrder(editingOrder);
 			this.Dispose();
 		}
 
@@ -220,7 +152,7 @@ namespace Program1
 
 		private bool CheckOrderIdValidity(ref string msg)
 		{
-			var idString = Order.Id;
+			var idString = editingOrder.Id;
 			if (OrderService.GetInstance().FindAll(order => order.Id == idString).Count != 0)
 			{
 				msg = "Order ID already exists.";
@@ -244,7 +176,7 @@ namespace Program1
 
 		private bool CheckClientNameValidity(ref string msg)
 		{
-			if (string.IsNullOrEmpty(Order.Client.Name))
+			if (string.IsNullOrEmpty(editingOrder.Client.Name))
 			{
 				msg = "Client name must not be empty.";
 				return false;
@@ -254,12 +186,12 @@ namespace Program1
 
 		private bool CheckClientPhoneNumberValidity(ref string msg)
 		{
-			if (string.IsNullOrEmpty(Order.Client.PhoneNumber))
+			if (string.IsNullOrEmpty(editingOrder.Client.PhoneNumber))
 			{
 				msg = "Phone number must not be empty.";
 				return false;
 			}
-			if (Regex.Match(Order.Client.PhoneNumber, "1[0-9]{10}").Success == false)
+			if (Regex.Match(editingOrder.Client.PhoneNumber, "1[0-9]{10}").Success == false)
 			{
 				msg = "Phone number must consist of exactly 11 digits starting with '1'.";
 				return false;

@@ -5,28 +5,30 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Program1
 {
 	public class OrderDetails
 	{
-        [Key]
-        public string Id { set; get; }
-		public string ProductName { set; get; }
-		public decimal ProductPrice { set; get; }
-		public uint Count
-		{
-			get; set;
-		}
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public long Id { set; get; }
+
+		[StringLength(32)]
+		public string ProductName { set; get; } = "";
+
+		public decimal ProductPrice { set; get; } = 0;
+
+		public int Count { set; get; }
 		public decimal Cost => Count * ProductPrice;
 
 		public OrderDetails()
 		{
 		}
 
-		public OrderDetails(string id, string productName, decimal productPrice, uint count = 1)
+		public OrderDetails(string productName, decimal productPrice, int count = 1)
 		{
-			Id = id;
 			ProductName = productName;
 			ProductPrice = productPrice;
 			Count = count;

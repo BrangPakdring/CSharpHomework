@@ -19,7 +19,7 @@ namespace Program1
 		[STAThread]
 		static void Main()
 		{
-			Test();
+//			Test();
 			SetProcessDPIAware();
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
@@ -33,9 +33,9 @@ namespace Program1
 			using (var db = new OrderDb())
 			{
 				id = order.Id;
-				OrderDetails details = new OrderDetails(DateTime.Now.Ticks.ToString(), "Egg", 1);
+				OrderDetails details = new OrderDetails("Egg", 1);
 				order.AddOrderDetails(details);
-				OrderDetails details2 = new OrderDetails(DateTime.Now.Ticks.ToString(), "Plant", 2);
+				OrderDetails details2 = new OrderDetails("Plant", 2);
 				order.AddOrderDetails(details2);
 
 				db.Orders.Add(order);
@@ -44,7 +44,7 @@ namespace Program1
 
 			using (var db = new OrderDb())
 			{
-				var tmp = db.Orders.Include("List").SingleOrDefault(o => o.Id == id);
+				var tmp = db.Orders.Include("List").Include("Client").SingleOrDefault(o => o.Id == id);
 				Console.WriteLine(tmp);
 			}
 
@@ -70,8 +70,8 @@ namespace Program1
 					var order1 = db.Orders.Include("List").SingleOrDefault(o => o.Id == id);
 					Console.WriteLine(order1);
 
-					db.OrderDetails.RemoveRange(order1.List);
 					db.Orders.Remove(order1);
+					db.OrderDetails.RemoveRange(order1.List);
 
 					db.SaveChanges();
 				}

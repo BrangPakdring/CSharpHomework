@@ -24,8 +24,10 @@ namespace Program1
 
 		private void Refresh(object sender, EventArgs e)
 		{
+			orderBindingSource.ResetBindings(false);
 			orderBindingSource.DataSource = currentList ?? orderService.List;
-			orderDataGridView.Refresh();
+			currentList = null;
+//			orderDataGridView.Refresh();
 			Refresh();
 		}
 
@@ -47,7 +49,7 @@ namespace Program1
 				if (orderDataGridView.SelectedRows.Count == 0) throw new Exception();
 				for (var i = orderDataGridView.SelectedRows.Count - 1; i >= 0; --i)
 				{
-					orderService.RemoveAll(order => order.Equals(orderDataGridView.SelectedRows[i].DataBoundItem as Order));
+					orderService.RemoveOrder(orderDataGridView.SelectedRows[i].DataBoundItem as Order);
 //					orderService.RemoveOrder(orderDataGridView.SelectedRows[i].Index);
 				}
 				Refresh(sender, e);
@@ -162,11 +164,7 @@ namespace Program1
 				return;
 			}
 
-			if (funcs.Count == 0)
-			{
-				currentList = orderService.List;
-			}
-			else
+			if (funcs.Any())
 			{
 				currentList =
 					orderService.FindAll(order =>
@@ -181,7 +179,6 @@ namespace Program1
 
 		private void ResetOrderButton_Click(object sender, EventArgs e)
 		{
-			currentList = null;
 			Refresh(sender, e);
 		}
 

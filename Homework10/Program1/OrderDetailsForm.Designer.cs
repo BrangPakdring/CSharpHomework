@@ -32,17 +32,17 @@
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.panel2 = new System.Windows.Forms.Panel();
-			this.checkOrderIdValidityButton = new System.Windows.Forms.Button();
 			this.orderIdTextBox = new System.Windows.Forms.TextBox();
+			this.costLabel = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
 			this.panel3 = new System.Windows.Forms.Panel();
 			this.phoneTextBox = new System.Windows.Forms.TextBox();
 			this.clientTextBox = new System.Windows.Forms.TextBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.panel4 = new System.Windows.Forms.Panel();
-			this.costLabel = new System.Windows.Forms.Label();
-			this.label3 = new System.Windows.Forms.Label();
+			this.checkOrderIdValidityButton = new System.Windows.Forms.Button();
 			this.confirmButton = new System.Windows.Forms.Button();
 			this.panel5 = new System.Windows.Forms.Panel();
 			this.panel7 = new System.Windows.Forms.Panel();
@@ -71,7 +71,7 @@
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panel1.Location = new System.Drawing.Point(0, 0);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(782, 136);
+			this.panel1.Size = new System.Drawing.Size(784, 136);
 			this.panel1.TabIndex = 0;
 			// 
 			// tableLayoutPanel1
@@ -104,24 +104,23 @@
 			this.panel2.Size = new System.Drawing.Size(216, 115);
 			this.panel2.TabIndex = 0;
 			// 
-			// checkOrderIdValidityButton
-			// 
-			this.checkOrderIdValidityButton.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checkOrderIdValidityButton.Location = new System.Drawing.Point(0, 0);
-			this.checkOrderIdValidityButton.Name = "checkOrderIdValidityButton";
-			this.checkOrderIdValidityButton.Size = new System.Drawing.Size(216, 115);
-			this.checkOrderIdValidityButton.TabIndex = 4;
-			this.checkOrderIdValidityButton.Text = "Check Validity";
-			this.checkOrderIdValidityButton.UseVisualStyleBackColor = true;
-			this.checkOrderIdValidityButton.Click += new System.EventHandler(this.CheckOrderIdValidityButton_Click);
-			// 
 			// orderIdTextBox
 			// 
 			this.orderIdTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
 			this.orderIdTextBox.Location = new System.Drawing.Point(2, 24);
 			this.orderIdTextBox.Name = "orderIdTextBox";
-			this.orderIdTextBox.Size = new System.Drawing.Size(212, 30);
+			this.orderIdTextBox.Size = new System.Drawing.Size(212, 26);
 			this.orderIdTextBox.TabIndex = 3;
+			// 
+			// costLabel
+			// 
+			this.costLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.costLabel.Location = new System.Drawing.Point(-2, 76);
+			this.costLabel.Name = "costLabel";
+			this.costLabel.Size = new System.Drawing.Size(216, 39);
+			this.costLabel.TabIndex = 3;
+			this.costLabel.Text = "0";
+			this.costLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// label1
 			// 
@@ -131,6 +130,15 @@
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Order ID:";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// label3
+			// 
+			this.label3.Location = new System.Drawing.Point(0, 57);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(216, 23);
+			this.label3.TabIndex = 2;
+			this.label3.Text = "Cost:";
+			this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// panel3
 			// 
@@ -148,7 +156,7 @@
 			this.phoneTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
 			this.phoneTextBox.Location = new System.Drawing.Point(1, 83);
 			this.phoneTextBox.Name = "phoneTextBox";
-			this.phoneTextBox.Size = new System.Drawing.Size(212, 30);
+			this.phoneTextBox.Size = new System.Drawing.Size(212, 26);
 			this.phoneTextBox.TabIndex = 3;
 			// 
 			// clientTextBox
@@ -157,7 +165,7 @@
 			this.clientTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
 			this.clientTextBox.Location = new System.Drawing.Point(0, 23);
 			this.clientTextBox.Name = "clientTextBox";
-			this.clientTextBox.Size = new System.Drawing.Size(216, 30);
+			this.clientTextBox.Size = new System.Drawing.Size(216, 26);
 			this.clientTextBox.TabIndex = 2;
 			// 
 			// label4
@@ -187,24 +195,16 @@
 			this.panel4.Size = new System.Drawing.Size(216, 115);
 			this.panel4.TabIndex = 2;
 			// 
-			// costLabel
+			// checkOrderIdValidityButton
 			// 
-			this.costLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.costLabel.Location = new System.Drawing.Point(-2, 76);
-			this.costLabel.Name = "costLabel";
-			this.costLabel.Size = new System.Drawing.Size(216, 39);
-			this.costLabel.TabIndex = 3;
-			this.costLabel.Text = "0";
-			this.costLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// label3
-			// 
-			this.label3.Location = new System.Drawing.Point(0, 57);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(216, 23);
-			this.label3.TabIndex = 2;
-			this.label3.Text = "Cost:";
-			this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.checkOrderIdValidityButton.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.checkOrderIdValidityButton.Location = new System.Drawing.Point(0, 0);
+			this.checkOrderIdValidityButton.Name = "checkOrderIdValidityButton";
+			this.checkOrderIdValidityButton.Size = new System.Drawing.Size(216, 115);
+			this.checkOrderIdValidityButton.TabIndex = 4;
+			this.checkOrderIdValidityButton.Text = "Check Validity";
+			this.checkOrderIdValidityButton.UseVisualStyleBackColor = true;
+			this.checkOrderIdValidityButton.Click += new System.EventHandler(this.CheckOrderIdValidityButton_Click);
 			// 
 			// confirmButton
 			// 
@@ -221,9 +221,9 @@
 			// 
 			this.panel5.Controls.Add(this.panel7);
 			this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panel5.Location = new System.Drawing.Point(0, 168);
+			this.panel5.Location = new System.Drawing.Point(0, 176);
 			this.panel5.Name = "panel5";
-			this.panel5.Size = new System.Drawing.Size(782, 385);
+			this.panel5.Size = new System.Drawing.Size(784, 385);
 			this.panel5.TabIndex = 1;
 			// 
 			// panel7
@@ -232,7 +232,7 @@
 			this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel7.Location = new System.Drawing.Point(0, 0);
 			this.panel7.Name = "panel7";
-			this.panel7.Size = new System.Drawing.Size(782, 385);
+			this.panel7.Size = new System.Drawing.Size(784, 385);
 			this.panel7.TabIndex = 1;
 			// 
 			// dataGridView1
@@ -250,7 +250,7 @@
 			this.dataGridView1.Location = new System.Drawing.Point(0, 0);
 			this.dataGridView1.Name = "dataGridView1";
 			this.dataGridView1.RowTemplate.Height = 24;
-			this.dataGridView1.Size = new System.Drawing.Size(782, 385);
+			this.dataGridView1.Size = new System.Drawing.Size(784, 385);
 			this.dataGridView1.TabIndex = 0;
 			// 
 			// costDataGridViewTextBoxColumn
@@ -284,7 +284,8 @@
 			// 
 			// orderDetailsBindingSource
 			// 
-			this.orderDetailsBindingSource.DataSource = typeof(Program1.OrderDetails);
+			this.orderDetailsBindingSource.DataMember = "List";
+			this.orderDetailsBindingSource.DataSource = this.orderBindingSource;
 			// 
 			// orderBindingSource
 			// 
@@ -295,7 +296,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.AutoSize = true;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.ClientSize = new System.Drawing.Size(782, 553);
+			this.ClientSize = new System.Drawing.Size(784, 561);
 			this.Controls.Add(this.panel5);
 			this.Controls.Add(this.panel1);
 			this.MaximumSize = new System.Drawing.Size(800, 600);
