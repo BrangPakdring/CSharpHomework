@@ -24,3 +24,7 @@ Repo for my C# Homework
 	* Program1: Order Mgr WinForm UI 
 * Homework8
 	* Program1: Order Mgr data validity check; Export orders to HTML via XSLT based XML
+* Homework9
+    * Program1: Crawler optimization using parallelism.
+* Homework10
+    * Program1: Order Mgr using database mysql access.
